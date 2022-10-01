@@ -5,6 +5,7 @@ import '../modules/modules.dart';
 
 
 class BaseScreenView extends StatefulWidget {
+  
   const BaseScreenView({Key? key}) : super(key: key);
 
   @override

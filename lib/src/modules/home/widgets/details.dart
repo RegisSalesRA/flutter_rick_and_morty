@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../config/config.dart'; 
-
+import '../../../../config/config.dart';
 
 void gotoDetailsPage(BuildContext context, image, tag, nome, location, origin,
     gender, species, status) {
@@ -8,7 +7,6 @@ void gotoDetailsPage(BuildContext context, image, tag, nome, location, origin,
     builder: (BuildContext context) => Scaffold(
       appBar: AppBar(
         title: const Text('Details'),
-        backgroundColor: Colors.black,
         elevation: 0.0,
         actions: null,
       ),

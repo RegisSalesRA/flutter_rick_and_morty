@@ -19,6 +19,8 @@ class _HomeState extends State<Home> {
   final _serachController = TextEditingController();
   List<Result> futureCharacterFilter = [];
   int initialPage = 1;
+  String popularEvents = 'All';
+  List<String> categories = ['All', 'Music', 'Art', 'Workshop', 'Workshop 2'];
 
   Future<List<Result>> fetchCharacters(pageNumber) async {
     final response = await http.get(Uri.parse(
@@ -84,207 +86,133 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return futureCharacterFilter.isEmpty
-        ? FutureBuilder<List<Result>>(
-            future: futureCharacterList,
-            builder: (context, snapshot) {
-              if (snapshot.hasData && !snapshot.hasError) {
-                List<Result>? data = snapshot.data;
-                return Scaffold(
-                    backgroundColor: Colors.black,
-                    body: Container(
-                        decoration: const BoxDecoration(),
-                        child: SafeArea(
-                            child: SingleChildScrollView(
-                          child:
-                              Column(mainAxisSize: MainAxisSize.min, children: [
-                            Center(
-                              child: Image.asset(
-                                'assets/images/logo.png',
-                                height: 60,
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 15),
-                              child: TextField(
-                                onSubmitted: (valorInputSearch) {
-                                  fetchFilterCharacters(valorInputSearch);
-                                },
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  isDense: true,
-                                  hintText: 'Search characters...',
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey.shade400,
-                                    fontSize: 14,
-                                  ),
-                                  prefixIcon: const Icon(
-                                    Icons.search,
-                                    color: CustomColors.containerColor,
-                                    size: 25,
-                                  ),
-                                  suffixIcon: IconButton(
-                                    onPressed: () {
-                                      FocusScope.of(context).unfocus();
-                                    },
-                                    icon: InkWell(
-                                      onTap: () async {
-                                        refreshPage();
-                                      },
-                                      child: const Icon(
-                                        Icons.refresh,
-                                        size: 25,
-                                        color: CustomColors.containerColor,
-                                      ),
-                                    ),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(60),
-                                    borderSide: const BorderSide(
-                                      width: 0,
-                                      style: BorderStyle.none,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: GridView.builder(
-                                    shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    itemCount: data!.length,
-                                    gridDelegate:
-                                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                                      maxCrossAxisExtent: 250,
-                                      crossAxisSpacing: 10.0,
-                                      mainAxisSpacing: 10.0,
-                                    ),
-                                    itemBuilder:
-                                        ((BuildContext context, int index) {
-                                      return InkWell(
-                                        child: ChracterWidget(
-                                          name: data[index].name,
-                                          image: data[index].image,
-                                          tagHero: data[index].id.toString(),
-                                        ),
-                                        onTap: () => {
-                                          gotoDetailsPage(
-                                            context,
-                                            data[index].image,
-                                            data[index].id.toString(),
-                                            data[index].name,
-                                            data[index].location.name,
-                                            data[index].origin.name,
-                                            data[index].gender,
-                                            data[index].species,
-                                            data[index].status,
-                                          )
-                                        },
-                                      );
-                                    })))
-                          ]),
-                        ))));
-              }
-              return const Center(child: CircularProgressIndicator());
-            },
-          )
-        : Scaffold(
-            backgroundColor: Colors.black,
-            body: SafeArea(
-                child: SingleChildScrollView(
-              child: Column(mainAxisSize: MainAxisSize.min, children: [
-                Center(
+    return FutureBuilder<List<Result>>(
+      future: futureCharacterList,
+      builder: (context, snapshot) {
+        if (snapshot.hasData && !snapshot.hasError) {
+          List<Result>? data = snapshot.data;
+          return SafeArea(
+              child: SingleChildScrollView(
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Center(
                   child: Image.asset(
                     'assets/images/logo.png',
                     height: 60,
                   ),
                 ),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                  child: TextField(
-                    onSubmitted: (valorInputSearch) {
-                      fetchFilterCharacters(valorInputSearch);
-                    },
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      isDense: true,
-                      hintText: 'Search characters...',
-                      hintStyle: TextStyle(
-                        color: Colors.grey.shade400,
-                        fontSize: 14,
-                      ),
-                      prefixIcon: const Icon(
-                        Icons.search,
-                        color: CustomColors.containerColor,
-                        size: 25,
-                      ),
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          FocusScope.of(context).unfocus();
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: TextField(
+                  onSubmitted: (valorInputSearch) {
+                    fetchFilterCharacters(valorInputSearch);
+                  },
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.grey.shade200,
+                    isDense: true,
+                    hintText: 'Search characters...',
+                    hintStyle: TextStyle(
+                      color: Colors.grey.shade400,
+                      fontSize: 14,
+                    ),
+                    prefixIcon: const Icon(
+                      Icons.search,
+                      color: CustomColors.containerColor,
+                      size: 25,
+                    ),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        FocusScope.of(context).unfocus();
+                      },
+                      icon: InkWell(
+                        onTap: () async {
+                          refreshPage();
                         },
-                        icon: InkWell(
-                          onTap: () async {
-                            refreshPage();
-                          },
-                          child: const Icon(
-                            Icons.refresh,
-                            size: 25,
-                            color: CustomColors.containerColor,
-                          ),
+                        child: const Icon(
+                          Icons.refresh,
+                          size: 25,
+                          color: CustomColors.containerColor,
                         ),
                       ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(60),
-                        borderSide: const BorderSide(
-                          width: 0,
-                          style: BorderStyle.none,
-                        ),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(60),
+                      borderSide: const BorderSide(
+                        width: 0,
+                        style: BorderStyle.none,
                       ),
                     ),
                   ),
                 ),
-                Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: futureCharacterFilter.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 250,
-                          crossAxisSpacing: 10.0,
-                          mainAxisSpacing: 10.0,
-                        ),
-                        itemBuilder: ((BuildContext context, int index) {
-                          return InkWell(
-                            child: ChracterWidget(
-                              name: futureCharacterFilter[index].name,
-                              image: futureCharacterFilter[index].image,
-                              tagHero:
-                                  futureCharacterFilter[index].id.toString(),
+              ),
+              GridView.builder(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
+                    childAspectRatio: 8 / 11.5,
+                  ),
+                  itemCount: data!.length,
+                  itemBuilder: (_, index) {
+                    return InkWell(
+                      onTap: () => {
+                        gotoDetailsPage(
+                          context,
+                          data[index].image,
+                          data[index].id.toString(),
+                          data[index].name,
+                          data[index].location.name,
+                          data[index].origin.name,
+                          data[index].gender,
+                          data[index].species,
+                          data[index].status,
+                        )
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Center(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Hero(
+                                tag: data[index].id.toString(),
+                                child: Image.network(
+                                  data[index].image,
+                                  fit: BoxFit.fitWidth,
+                                ),
+                              ),
                             ),
-                            onTap: () => {
-                              gotoDetailsPage(
-                                context,
-                                futureCharacterFilter[index].image,
-                                futureCharacterFilter[index].id.toString(),
-                                futureCharacterFilter[index].name,
-                                futureCharacterFilter[index].location.name,
-                                futureCharacterFilter[index].origin.name,
-                                futureCharacterFilter[index].gender,
-                                futureCharacterFilter[index].species,
-                                futureCharacterFilter[index].status,
-                              )
-                            },
-                          );
-                        })))
-              ]),
-            )));
+                          ),
+                          Center(
+                            child: Text(
+                              data[index].name,
+                              style: const TextStyle(
+                                  overflow: TextOverflow.ellipsis,
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+            ]),
+          ));
+        }
+        return Container(
+          height: double.infinity,
+          width: double.infinity,
+          color: Colors.white,
+          child: const Center(child: CircularProgressIndicator()),
+        );
+      },
+    );
   }
 }
