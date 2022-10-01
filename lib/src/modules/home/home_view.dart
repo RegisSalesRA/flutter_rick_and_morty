@@ -86,133 +86,256 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Result>>(
-      future: futureCharacterList,
-      builder: (context, snapshot) {
-        if (snapshot.hasData && !snapshot.hasError) {
-          List<Result>? data = snapshot.data;
-          return SafeArea(
-              child: SingleChildScrollView(
-            child: Column(mainAxisSize: MainAxisSize.min, children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Center(
-                  child: Image.asset(
-                    'assets/images/logo.png',
-                    height: 60,
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: TextField(
-                  onSubmitted: (valorInputSearch) {
-                    fetchFilterCharacters(valorInputSearch);
-                  },
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.grey.shade200,
-                    isDense: true,
-                    hintText: 'Search characters...',
-                    hintStyle: TextStyle(
-                      color: Colors.grey.shade400,
-                      fontSize: 14,
-                    ),
-                    prefixIcon: const Icon(
-                      Icons.search,
-                      color: CustomColors.containerColor,
-                      size: 25,
-                    ),
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        FocusScope.of(context).unfocus();
-                      },
-                      icon: InkWell(
-                        onTap: () async {
-                          refreshPage();
-                        },
-                        child: const Icon(
-                          Icons.refresh,
-                          size: 25,
-                          color: CustomColors.containerColor,
+    return futureCharacterFilter.isEmpty
+        ? FutureBuilder<List<Result>>(
+            future: futureCharacterList,
+            builder: (context, snapshot) {
+              if (snapshot.hasData && !snapshot.hasError) {
+                List<Result>? data = snapshot.data;
+                return SafeArea(
+                  child: SingleChildScrollView(
+                    child: Column(mainAxisSize: MainAxisSize.min, children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Center(
+                          child: Image.asset(
+                            'assets/images/logo.png',
+                            height: 60,
+                          ),
                         ),
                       ),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(60),
-                      borderSide: const BorderSide(
-                        width: 0,
-                        style: BorderStyle.none,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              GridView.builder(
-                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                  physics: const BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 8,
-                    crossAxisSpacing: 8,
-                    childAspectRatio: 8 / 11.5,
-                  ),
-                  itemCount: data!.length,
-                  itemBuilder: (_, index) {
-                    return InkWell(
-                      onTap: () => {
-                        gotoDetailsPage(
-                          context,
-                          data[index].image,
-                          data[index].id.toString(),
-                          data[index].name,
-                          data[index].location.name,
-                          data[index].origin.name,
-                          data[index].gender,
-                          data[index].species,
-                          data[index].status,
-                        )
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Center(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Hero(
-                                tag: data[index].id.toString(),
-                                child: Image.network(
-                                  data[index].image,
-                                  fit: BoxFit.fitWidth,
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: TextField(
+                          onSubmitted: (valorInputSearch) {
+                            fetchFilterCharacters(valorInputSearch);
+                          },
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.grey.shade200,
+                            isDense: true,
+                            hintText: 'Search characters...',
+                            hintStyle: TextStyle(
+                              color: Colors.grey.shade400,
+                              fontSize: 14,
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.search,
+                              color: CustomColors.containerColor,
+                              size: 25,
+                            ),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                FocusScope.of(context).unfocus();
+                              },
+                              icon: InkWell(
+                                onTap: () async {
+                                  refreshPage();
+                                },
+                                child: const Icon(
+                                  Icons.refresh,
+                                  size: 25,
+                                  color: CustomColors.containerColor,
                                 ),
                               ),
                             ),
-                          ),
-                          Center(
-                            child: Text(
-                              data[index].name,
-                              style: const TextStyle(
-                                  overflow: TextOverflow.ellipsis,
-                                  color: Colors.black,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(60),
+                              borderSide: const BorderSide(
+                                width: 0,
+                                style: BorderStyle.none,
+                              ),
                             ),
                           ),
-                        ],
+                        ),
                       ),
-                    );
-                  }),
-            ]),
-          ));
-        }
-        return Container(
-          height: double.infinity,
-          width: double.infinity,
-          color: Colors.white,
-          child: const Center(child: CircularProgressIndicator()),
-        );
-      },
-    );
+                      GridView.builder(
+                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 8,
+                            crossAxisSpacing: 8,
+                            childAspectRatio: 8 / 11.5,
+                          ),
+                          itemCount: data!.length,
+                          itemBuilder: (_, index) {
+                            return InkWell(
+                              onTap: () => {
+                                gotoDetailsPage(
+                                  context,
+                                  data[index].image,
+                                  data[index].id.toString(),
+                                  data[index].name,
+                                  data[index].location.name,
+                                  data[index].origin.name,
+                                  data[index].gender,
+                                  data[index].species,
+                                  data[index].status,
+                                )
+                              },
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(20)),
+                                    child: Center(
+                                      child: Hero(
+                                        tag: data[index].id.toString(),
+                                        child: Image.network(
+                                          data[index].image,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      data[index].name,
+                                      style: const TextStyle(
+                                          overflow: TextOverflow.ellipsis,
+                                          color: Colors.black,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                    ]),
+                  ),
+                );
+              }
+              return Container(
+                height: double.infinity,
+                width: double.infinity,
+                color: Colors.white,
+                child: const Center(child: CircularProgressIndicator()),
+              );
+            },
+          )
+        : SafeArea(
+            child: SingleChildScrollView(
+              child: Column(mainAxisSize: MainAxisSize.min, children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Center(
+                    child: Image.asset(
+                      'assets/images/logo.png',
+                      height: 60,
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: TextField(
+                    onSubmitted: (valorInputSearch) {
+                      fetchFilterCharacters(valorInputSearch);
+                    },
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.grey.shade200,
+                      isDense: true,
+                      hintText: 'Search characters...',
+                      hintStyle: TextStyle(
+                        color: Colors.grey.shade400,
+                        fontSize: 14,
+                      ),
+                      prefixIcon: const Icon(
+                        Icons.search,
+                        color: CustomColors.containerColor,
+                        size: 25,
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          FocusScope.of(context).unfocus();
+                        },
+                        icon: InkWell(
+                          onTap: () async {
+                            refreshPage();
+                          },
+                          child: const Icon(
+                            Icons.refresh,
+                            size: 25,
+                            color: CustomColors.containerColor,
+                          ),
+                        ),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(60),
+                        borderSide: const BorderSide(
+                          width: 0,
+                          style: BorderStyle.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                GridView.builder(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                    physics: const BouncingScrollPhysics(),
+                    shrinkWrap: true,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
+                      childAspectRatio: 8 / 11.5,
+                    ),
+                    itemCount: futureCharacterFilter.length,
+                    itemBuilder: (_, index) {
+                      return InkWell(
+                        onTap: () => {
+                          gotoDetailsPage(
+                            context,
+                            futureCharacterFilter[index].image,
+                            futureCharacterFilter[index].id.toString(),
+                            futureCharacterFilter[index].name,
+                            futureCharacterFilter[index].location.name,
+                            futureCharacterFilter[index].origin.name,
+                            futureCharacterFilter[index].gender,
+                            futureCharacterFilter[index].species,
+                            futureCharacterFilter[index].status,
+                          )
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Center(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Hero(
+                                  tag: futureCharacterFilter[index]
+                                      .id
+                                      .toString(),
+                                  child: Image.network(
+                                    futureCharacterFilter[index].image,
+                                    fit: BoxFit.fitWidth,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: Text(
+                                futureCharacterFilter[index].name,
+                                style: const TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
+              ]),
+            ),
+          );
   }
 }
