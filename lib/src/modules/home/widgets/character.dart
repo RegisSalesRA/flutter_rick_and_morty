@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/css/colors.dart';
+import 'package:rick_and_morty/config/colors.dart';
 
 class ChracterWidget extends StatelessWidget {
   final int? id;

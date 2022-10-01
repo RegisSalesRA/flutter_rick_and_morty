@@ -1,37 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/css/animated/animated_fade_transiction.dart';
-import 'package:rick_and_morty/css/colors.dart';
-import 'package:rick_and_morty/css/text.dart';
-import 'package:rick_and_morty/widgets/appBar.dart';
+import '../../../../config/config.dart'; 
+
 
 void gotoDetailsPage(BuildContext context, image, tag, nome, location, origin,
     gender, species, status) {
   Navigator.of(context).push(MaterialPageRoute<void>(
     builder: (BuildContext context) => Scaffold(
-      appBar: MyAppBar(
-        title: nome,
-        actionsAppBar: Row(children: [
-          InkWell(
-            onTap: () {},
-            child: const Padding(
-                padding: EdgeInsets.all(5), child: Icon(Icons.filter_alt)),
-          ),
-          const SizedBox(
-            width: 8,
-          )
-        ]),
+      appBar: AppBar(
+        title: const Text('Details'),
+        backgroundColor: Colors.black,
+        elevation: 0.0,
+        actions: null,
       ),
-      extendBodyBehindAppBar: true,
-      body: Container(
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/enviroments/background_pages.jpg"),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: SafeArea(
-            child: SingleChildScrollView(
+      body: SafeArea(
+          child: Container(
+        decoration: const BoxDecoration(color: Colors.black),
+        child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
@@ -55,8 +39,9 @@ void gotoDetailsPage(BuildContext context, image, tag, nome, location, origin,
                           ))),
                 ])),
               ),
-              SizedBox(
-                height: 190,
+              Container(
+                decoration: const BoxDecoration(color: Colors.black),
+                height: 200,
                 width: 325,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -149,8 +134,8 @@ void gotoDetailsPage(BuildContext context, image, tag, nome, location, origin,
               ),
             ],
           ),
-        )),
-      ),
+        ),
+      )),
     ),
   ));
 }

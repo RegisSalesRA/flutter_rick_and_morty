@@ -78,8 +78,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/enviroments/background_pages.jpg
-    - assets/enviroments/splash_home.jpg
+    - assets/images/
+    
     
   fonts:
     - family: Poppins

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/css/colors.dart';
-import 'package:rick_and_morty/pages/splash_home.dart';
+import 'package:rick_and_morty/config/colors.dart';
+import 'src/base/base_screen_view.dart';
 
 void main() => runApp(const MyApp());
 
@@ -17,8 +17,8 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Rick and Morty',
-      theme: ThemeData(primaryColor: primaryColor, fontFamily: 'Roboto'),
-      home: const SplashHome(),
+      theme: ThemeData(primaryColor: primaryColor, fontFamily: 'Poppins'),
+      home: const BaseScreenView(),
     );
   }
 }

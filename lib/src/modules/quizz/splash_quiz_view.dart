@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/css/colors.dart';
-import 'package:rick_and_morty/pages/home.dart';
+import 'package:rick_and_morty/config/colors.dart';
+import 'package:rick_and_morty/src/modules/home/home_view.dart';
 
-class SplashHome extends StatefulWidget {
-  const SplashHome({Key? key}) : super(key: key);
+class SplashScreenQuiz extends StatefulWidget {
+  const SplashScreenQuiz({Key? key}) : super(key: key);
 
   @override
-  State<SplashHome> createState() => _SplashHomeState();
+  State<SplashScreenQuiz> createState() => _SplashScreenQuizState();
 }
 
-class _SplashHomeState extends State<SplashHome> with TickerProviderStateMixin {
+class _SplashScreenQuizState extends State<SplashScreenQuiz> with TickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
     duration: const Duration(seconds: 6),
     vsync: this,
@@ -58,7 +58,7 @@ class _SplashHomeState extends State<SplashHome> with TickerProviderStateMixin {
         width: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/enviroments/splash_home.jpg"),
+            image: AssetImage("assets/images/splash_home.jpg"),
             fit: BoxFit.cover,
           ),
         ),
@@ -69,7 +69,8 @@ class _SplashHomeState extends State<SplashHome> with TickerProviderStateMixin {
               scale: _animation,
               child: InkWell(
                 onTap: () {
-                  Navigator.of(context).pushReplacement(_createRoute());
+                  print("Tela da screen");
+                  // Navigator.of(context).pushReplacement(_createRoute());
                 },
                 child: Container(
                   height: 60,

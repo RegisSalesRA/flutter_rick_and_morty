@@ -8,4 +8,4 @@ class CustomColors {
   static const Color title = Color(0xFFFFFFFF);
 }
 
-const primaryColor = Color(0xEE000000);
+const primaryColor = Color(0xEE0099cc);
