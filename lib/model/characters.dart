@@ -1,5 +1,3 @@
-// ignore_for_file: constant_identifier_names, unnecessary_null_comparison, prefer_conditional_assignment
-
 class CharacterList {
   CharacterList({
     required this.info,

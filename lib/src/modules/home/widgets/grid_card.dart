@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/src/modules/home/widgets/widgets.dart';
+
+import 'widgets.dart';
 
 class GridCard extends StatelessWidget {
   final List<dynamic> listItens;
@@ -26,17 +27,18 @@ class GridCard extends StatelessWidget {
           return InkWell(
             onTap: () => {
               FocusScope.of(context).unfocus(),
-              gotoDetailsPage(
-                context,
-                listItens[index].image,
-                listItens[index].id.toString(),
-                listItens[index].name,
-                listItens[index].location.name,
-                listItens[index].origin.name,
-                listItens[index].gender,
-                listItens[index].species,
-                listItens[index].status,
-              )
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => DetailWidget(
+                        image: listItens[index].image,
+                        tag: listItens[index].id.toString(),
+                        name: listItens[index].name,
+                        location: listItens[index].location.name,
+                        origin: listItens[index].origin.name,
+                        gender: listItens[index].gender,
+                        species: listItens[index].species,
+                        status: listItens[index].status,
+                        episode: listItens[index].episode,
+                      )))
             },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

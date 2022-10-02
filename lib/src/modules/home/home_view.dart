@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../model/characters.dart';
+import '../../../model/model.dart';
 import 'widgets/widgets.dart';
 
 class Home extends StatefulWidget {
@@ -17,9 +17,8 @@ class _HomeState extends State<Home> {
   late Future<List<Result>> futureCharacterList;
   final _serachController = TextEditingController();
   List<Result> futureCharacterFilter = [];
-  int initialPage = 1;
+
   String popularEvents = 'All';
-  List<String> categories = ['All', 'Music', 'Art', 'Workshop', 'Workshop 2'];
 
   Future<List<Result>> fetchCharacters(pageNumber) async {
     final response = await http.get(Uri.parse(
