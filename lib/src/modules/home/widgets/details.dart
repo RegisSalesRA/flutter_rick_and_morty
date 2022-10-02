@@ -311,8 +311,8 @@ class _DetailWidgetState extends State<DetailWidget> {
                             height: 10,
                           ),
                           ExpansionTile(
-                            collapsedTextColor: primaryColor,
-                            collapsedIconColor: primaryColor,
+                            textColor: primaryColor,
+                            iconColor: primaryColor,
                             tilePadding: const EdgeInsets.only(right: 20),
                             title: const Text(
                               "Episodes",
