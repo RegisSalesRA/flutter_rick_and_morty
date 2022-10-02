@@ -25,6 +25,7 @@ class GridCard extends StatelessWidget {
         itemBuilder: (_, index) {
           return InkWell(
             onTap: () => {
+              FocusScope.of(context).unfocus(),
               gotoDetailsPage(
                 context,
                 listItens[index].image,
