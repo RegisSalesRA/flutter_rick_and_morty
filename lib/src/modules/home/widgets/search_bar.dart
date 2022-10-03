@@ -3,9 +3,10 @@ import '../../../../config/config.dart';
 
 class SearchBar extends StatelessWidget {
   final Function(String) onSubmitted;
+  final Function(String)? onFilter;
   final VoidCallback onTap;
 
-  const SearchBar({Key? key, required this.onSubmitted, required this.onTap})
+  const SearchBar({Key? key, required this.onSubmitted, required this.onTap, required this.onFilter})
       : super(key: key);
 
   @override
@@ -14,6 +15,7 @@ class SearchBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: TextField(
         onSubmitted: onSubmitted,
+        onChanged: onFilter,
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.grey.shade200,

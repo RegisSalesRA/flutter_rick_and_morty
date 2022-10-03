@@ -17,7 +17,8 @@ class _HomeState extends State<Home> {
   late Future<List<Result>> futureCharacterList;
   final _serachController = TextEditingController();
   List<Result> futureCharacterFilter = [];
-
+  List<String> listaStringFilter = ["Joao", "Julio", "Sales", "Rengel", "Zamb"];
+  String searchString = "";
   String popularEvents = 'All';
 
   Future<List<Result>> fetchCharacters(pageNumber) async {
@@ -91,11 +92,26 @@ class _HomeState extends State<Home> {
             child: SingleChildScrollView(
               child: Column(mainAxisSize: MainAxisSize.min, children: [
                 const Header(),
-                SearchBar(onSubmitted: (valorInputSearch) {
+                SearchBar(onFilter: (value) {
+                  setState(() {
+                    searchString = value.toLowerCase();
+                  });
+                }, onSubmitted: (valorInputSearch) {
                   fetchFilterCharacters(valorInputSearch);
                 }, onTap: () async {
                   refreshPage();
                 }),
+                ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: listaStringFilter.length,
+                    itemBuilder: (context, index) {
+                      return listaStringFilter[index]
+                                  .toLowerCase()
+                                  .contains(searchString) &&
+                              searchString != ""
+                          ? Text(listaStringFilter[index])
+                          : Container();
+                    }),
                 futureCharacterFilter.isEmpty
                     ? GridCard(
                         listItens: data!,
