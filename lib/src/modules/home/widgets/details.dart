@@ -182,14 +182,16 @@ class _DetailWidgetState extends State<DetailWidget> {
                                     fontSize: CustomText.titulo,
                                     fontWeight: FontWeight.bold),
                               ),
-                              AnimatedFadedText(
-                                direction: 1,
-                                child: Text(
-                                  widget.origin.toString(),
-                                  style: const TextStyle(
-                                    overflow: TextOverflow.ellipsis,
-                                    color: Colors.black,
-                                    fontSize: 16,
+                              Expanded(
+                                child: AnimatedFadedText(
+                                  direction: 1,
+                                  child: Text(
+                                    widget.origin,
+                                    maxLines: 1,
+                                    style: const TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                        color: Colors.black,
+                                        fontSize: 16),
                                   ),
                                 ),
                               ),
@@ -205,14 +207,17 @@ class _DetailWidgetState extends State<DetailWidget> {
                                     fontSize: CustomText.titulo,
                                     fontWeight: FontWeight.bold),
                               ),
-                              AnimatedFadedText(
-                                direction: 1,
-                                child: Text(
-                                  widget.location,
-                                  style: const TextStyle(
-                                      overflow: TextOverflow.ellipsis,
-                                      color: Colors.black,
-                                      fontSize: 16),
+                              Expanded(
+                                child: AnimatedFadedText(
+                                  direction: 1,
+                                  child: Text(
+                                    widget.location,
+                                    maxLines: 1,
+                                    style: const TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                        color: Colors.black,
+                                        fontSize: 16),
+                                  ),
                                 ),
                               ),
                             ],
@@ -332,10 +337,6 @@ class _DetailWidgetState extends State<DetailWidget> {
                                       itemBuilder: (context, index) {
                                         return Column(
                                           children: [
-                                            Divider(
-                                              thickness: 2,
-                                              color: Colors.grey.shade200,
-                                            ),
                                             Text(episodesByCharactersList[index]
                                                 .name),
                                             Text(episodesByCharactersList[index]
