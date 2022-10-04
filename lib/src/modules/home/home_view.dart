@@ -15,7 +15,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   late Future<List<Result>> futureCharacterList;
-  final _serachController = TextEditingController();
+  final serachController = TextEditingController();
   List<Result> futureCharacterFilter = [];
   List<String> listaStringFilter = ["Joao", "Julio", "Sales", "Rengel", "Zamb"];
   String searchString = "";
@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
   }
 
   Future<List<Result>> fetchFilterCharacters(nameValue) async {
-    if (_serachController.text.isEmpty || _serachController.text == "") {}
+    if (serachController.text.isEmpty || serachController.text == "") {}
 
     setState(() {
       futureCharacterFilter = [];
@@ -72,13 +72,16 @@ class _HomeState extends State<Home> {
     super.initState();
     futureCharacterList = fetchCharacters(1);
     refreshPage();
-    //  futureCharacterFilter = fetchFilterCharacters(value);
+  }
+
+  void limparControlers() {
+    serachController.clear();
   }
 
   @override
   void dispose() {
     super.dispose();
-    _serachController;
+    serachController;
   }
 
   @override
@@ -92,33 +95,102 @@ class _HomeState extends State<Home> {
             child: SingleChildScrollView(
               child: Column(mainAxisSize: MainAxisSize.min, children: [
                 const Header(),
-                SearchBar(onFilter: (value) {
-                  setState(() {
-                    searchString = value.toLowerCase();
-                  });
-                }, onSubmitted: (valorInputSearch) {
-                  fetchFilterCharacters(valorInputSearch);
-                }, onTap: () async {
-                  refreshPage();
-                }),
-                ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: listaStringFilter.length,
-                    itemBuilder: (context, index) {
-                      return listaStringFilter[index]
-                                  .toLowerCase()
-                                  .contains(searchString) &&
-                              searchString != ""
-                          ? Text(listaStringFilter[index])
-                          : Container();
+                SearchBar(
+                    controller: serachController,
+                    onFilter: (value) {
+                      setState(() {
+                        searchString = value.toLowerCase().toString();
+                      });
+                    },
+                    onSubmitted: (valorInputSearch) {
+                      fetchFilterCharacters(valorInputSearch);
+                    },
+                    onTap: () async {
+                      refreshPage();
+                      limparControlers();
+                      setState(() {
+                        searchString = '';
+                      });
                     }),
-                futureCharacterFilter.isEmpty
-                    ? GridCard(
-                        listItens: data!,
-                      )
-                    : GridCard(
-                        listItens: futureCharacterFilter,
-                      ),
+                if (searchString.isNotEmpty)
+                  futureCharacterFilter.isEmpty
+                      ? ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: data!.length,
+                          itemBuilder: (_, index) {
+                            return data[index]
+                                    .name
+                                    .toLowerCase()
+                                    .contains(searchString)
+                                ? InkWell(
+                                    onTap: () => {
+                                      FocusScope.of(context).unfocus(),
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DetailWidget(
+                                                    image: data[index].image,
+                                                    tag: data[index]
+                                                        .id
+                                                        .toString(),
+                                                    name: data[index].name,
+                                                    location: data[index]
+                                                        .location
+                                                        .name,
+                                                    origin:
+                                                        data[index].origin.name,
+                                                    gender: data[index].gender!,
+                                                    species:
+                                                        data[index].species!,
+                                                    status: data[index].status!,
+                                                    episode:
+                                                        data[index].episode,
+                                                  )))
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Center(
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            child: Hero(
+                                              tag: data[index].id.toString(),
+                                              child: Image.network(
+                                                data[index].image,
+                                                fit: BoxFit.fitWidth,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Center(
+                                          child: Text(
+                                            data[index].name,
+                                            style: const TextStyle(
+                                                overflow: TextOverflow.ellipsis,
+                                                color: Colors.black,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : Container();
+                          })
+                      : GridCard(
+                          listItens: futureCharacterFilter,
+                        ),
+                if (searchString.isEmpty)
+                  futureCharacterFilter.isEmpty
+                      ? GridCard(
+                          listItens: data!,
+                        )
+                      : GridCard(
+                          listItens: futureCharacterFilter,
+                        ),
               ]),
             ),
           );
