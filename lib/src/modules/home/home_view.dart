@@ -151,34 +151,43 @@ class _HomeState extends State<Home> {
                                                         data[index].episode,
                                                   )))
                                     },
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Center(
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            child: Hero(
-                                              tag: data[index].id.toString(),
-                                              child: Image.network(
-                                                data[index].image,
-                                                fit: BoxFit.fitWidth,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 15),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Center(
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              child: Hero(
+                                                tag: data[index].id.toString(),
+                                                child: Image.network(
+                                                  data[index].image,
+                                                  fit: BoxFit.fitWidth,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        Center(
-                                          child: Text(
-                                            data[index].name,
-                                            style: const TextStyle(
-                                                overflow: TextOverflow.ellipsis,
-                                                color: Colors.black,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.bold),
+                                          Center(
+                                            child: Padding(
+                                              padding: const EdgeInsets.symmetric(
+                                                  vertical: 15),
+                                              child: Text(
+                                                data[index].name,
+                                                style: const TextStyle(
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    color: Colors.black,
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   )
                                 : Container();

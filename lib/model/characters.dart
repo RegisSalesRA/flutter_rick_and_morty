@@ -1,3 +1,6 @@
+// ignore: duplicate_ignore
+// ignore_for_file: constant_identifier_names
+
 class CharacterList {
   CharacterList({
     required this.info,
@@ -107,6 +110,7 @@ class Result {
       };
 }
 
+
 enum Gender { MALE, FEMALE, UNKNOWN }
 
 final genderValues = EnumValues(
@@ -149,6 +153,7 @@ class EnumValues<T> {
   EnumValues(this.map);
 
   Map<T, String> get reverse {
+    // ignore: prefer_conditional_assignment, unnecessary_null_comparison
     if (reverseMap == null) {
       reverseMap = map.map((k, v) => MapEntry(v, k));
     }
