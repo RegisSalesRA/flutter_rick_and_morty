@@ -105,6 +105,9 @@ class _HomeState extends State<Home> {
                     onSubmitted: (valorInputSearch) {
                       fetchFilterCharacters(valorInputSearch);
                     },
+                    onTapFilter: () async {
+                      fetchFilterCharacters(serachController.text);
+                    },
                     onTap: () async {
                       refreshPage();
                       limparControlers();

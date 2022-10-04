@@ -5,9 +5,10 @@ class SearchBar extends StatelessWidget {
   final Function(String) onSubmitted;
   final Function(String)? onFilter;
   final VoidCallback onTap;
+  final VoidCallback onTapFilter;
   final  TextEditingController controller;
 
-  const SearchBar({Key? key, required this.onSubmitted, required this.onTap, required this.onFilter, required this.controller})
+  const SearchBar({Key? key, required this.onSubmitted, required this.onTapFilter, required this.onTap, required this.onFilter, required this.controller})
       : super(key: key);
 
   @override
@@ -27,10 +28,18 @@ class SearchBar extends StatelessWidget {
             color: Colors.grey.shade400,
             fontSize: 14,
           ),
-          prefixIcon: const Icon(
-            Icons.search,
-            color: CustomColors.containerColor,
-            size: 25,
+          prefixIcon:  IconButton(
+            onPressed: () {
+              FocusScope.of(context).unfocus();
+            },
+            icon: InkWell(
+              onTap: onTapFilter,
+              child: const Icon(
+                Icons.search,
+                size: 25,
+                color: CustomColors.containerColor,
+              ),
+            ),
           ),
           suffixIcon: IconButton(
             onPressed: () {
