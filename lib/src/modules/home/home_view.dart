@@ -15,11 +15,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   late Future<List<Result>> futureCharacterList;
-  final serachController = TextEditingController();
+  final searchController = TextEditingController();
   List<Result> futureCharacterFilter = [];
-  List<String> listaStringFilter = ["Joao", "Julio", "Sales", "Rengel", "Zamb"];
   String searchString = "";
-  String popularEvents = 'All';
 
   Future<List<Result>> fetchCharacters(pageNumber) async {
     final response = await http.get(Uri.parse(
@@ -36,7 +34,7 @@ class _HomeState extends State<Home> {
   }
 
   Future<List<Result>> fetchFilterCharacters(nameValue) async {
-    if (serachController.text.isEmpty || serachController.text == "") {}
+    if (searchString.isEmpty || searchString == "") {}
 
     setState(() {
       futureCharacterFilter = [];
@@ -67,6 +65,10 @@ class _HomeState extends State<Home> {
     });
   }
 
+  void limparControlers() {
+    searchController.clear();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -74,14 +76,10 @@ class _HomeState extends State<Home> {
     refreshPage();
   }
 
-  void limparControlers() {
-    serachController.clear();
-  }
-
   @override
   void dispose() {
     super.dispose();
-    serachController;
+    searchController;
   }
 
   @override
@@ -96,17 +94,27 @@ class _HomeState extends State<Home> {
               child: Column(mainAxisSize: MainAxisSize.min, children: [
                 const Header(),
                 SearchBar(
-                    controller: serachController,
+                    controller: searchController,
                     onFilter: (value) {
                       setState(() {
                         searchString = value.toLowerCase().toString();
                       });
                     },
-                    onSubmitted: (valorInputSearch) {
-                      fetchFilterCharacters(valorInputSearch);
+                    onSubmitted: (valorInputSearch) async {
+                      await fetchFilterCharacters(valorInputSearch);
+                      limparControlers();
+                      setState(() {
+                        searchString = '';
+                      });
+                      FocusScope.of(context).unfocus();
                     },
                     onTapFilter: () async {
-                      fetchFilterCharacters(serachController.text);
+                      await fetchFilterCharacters(searchString);
+                      limparControlers();
+                      setState(() {
+                        searchString = '';
+                      });
+                      FocusScope.of(context).unfocus();
                     },
                     onTap: () async {
                       refreshPage();
@@ -114,21 +122,25 @@ class _HomeState extends State<Home> {
                       setState(() {
                         searchString = '';
                       });
+                      FocusScope.of(context).unfocus();
                     }),
-                if (searchString.isNotEmpty)
-                  futureCharacterFilter.isEmpty
-                      ? ListViewCard(data: data, searchString: searchString)
-                      : GridCard(
-                          listItens: futureCharacterFilter,
-                        ),
-                if (searchString.isEmpty)
-                  futureCharacterFilter.isEmpty
-                      ? GridCard(
-                          listItens: data!,
-                        )
-                      : GridCard(
-                          listItens: futureCharacterFilter,
-                        ),
+                if (futureCharacterFilter.isEmpty) ...[
+                  if (searchString.isNotEmpty)
+                    ListViewCard(data: data, searchString: searchString),
+                  if (searchString.isEmpty || searchString == '')
+                    GridCard(
+                      listItens: data!,
+                    ),
+                ] else if (futureCharacterFilter.isNotEmpty) ...[
+                  if (searchString.isNotEmpty)
+                    ListViewCard(
+                        data: futureCharacterFilter,
+                        searchString: searchString),
+                  if (searchString.isEmpty || searchString == '')
+                    GridCard(
+                      listItens: futureCharacterFilter,
+                    ),
+                ],
               ]),
             ),
           );
