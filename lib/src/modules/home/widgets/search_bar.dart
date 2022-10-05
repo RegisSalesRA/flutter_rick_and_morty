@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import '../../../../config/config.dart';
 
 class SearchBar extends StatelessWidget {
-  final Function(String) onSubmitted;
+  final Function(String)? onSubmitted;
   final Function(String)? onFilter;
-  final VoidCallback onTap;
-  final VoidCallback onTapFilter;
-  final TextEditingController controller;
+  final VoidCallback? onTap;
+  final VoidCallback? onTapFilter;
+  final TextEditingController? controller;
 
   const SearchBar(
       {Key? key,

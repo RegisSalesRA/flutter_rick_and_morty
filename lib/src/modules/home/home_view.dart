@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../config/config.dart';
 import '../../../model/model.dart';
 import 'widgets/widgets.dart';
 
@@ -18,6 +19,7 @@ class _HomeState extends State<Home> {
   final searchController = TextEditingController();
   List<Result> futureCharacterFilter = [];
   String searchString = "";
+  bool isLoading = false;
 
   Future<List<Result>> fetchCharacters(pageNumber) async {
     final response = await http.get(Uri.parse(
@@ -69,6 +71,16 @@ class _HomeState extends State<Home> {
     searchController.clear();
   }
 
+  void loadingPage() async {
+    setState(() {
+      isLoading = true;
+    });
+    await Future.delayed(const Duration(seconds: 2));
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -84,73 +96,119 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return FutureBuilder<List<Result>>(
       future: futureCharacterList,
       builder: (context, snapshot) {
         if (snapshot.hasData && !snapshot.hasError) {
           List<Result>? data = snapshot.data;
           return SafeArea(
-            child: SingleChildScrollView(
-              child: Column(mainAxisSize: MainAxisSize.min, children: [
-                const Header(),
-                SearchBar(
-                    controller: searchController,
-                    onFilter: (value) {
-                      setState(() {
-                        searchString = value.toLowerCase().toString();
-                      });
-                    },
-                    onSubmitted: (valorInputSearch) async {
-                      await fetchFilterCharacters(valorInputSearch);
-                      limparControlers();
-                      setState(() {
-                        searchString = '';
-                      });
-                      FocusScope.of(context).unfocus();
-                    },
-                    onTapFilter: () async {
-                      await fetchFilterCharacters(searchString);
-                      limparControlers();
-                      setState(() {
-                        searchString = '';
-                      });
-                      FocusScope.of(context).unfocus();
-                    },
-                    onTap: () async {
-                      refreshPage();
-                      limparControlers();
-                      setState(() {
-                        searchString = '';
-                      });
-                      FocusScope.of(context).unfocus();
-                    }),
-                if (futureCharacterFilter.isEmpty) ...[
-                  if (searchString.isNotEmpty)
-                    ListViewCard(data: data, searchString: searchString),
-                  if (searchString.isEmpty || searchString == '')
-                    GridCard(
-                      listItens: data!,
-                    ),
-                ] else if (futureCharacterFilter.isNotEmpty) ...[
-                  if (searchString.isNotEmpty)
-                    ListViewCard(
-                        data: futureCharacterFilter,
-                        searchString: searchString),
-                  if (searchString.isEmpty || searchString == '')
-                    GridCard(
-                      listItens: futureCharacterFilter,
-                    ),
-                ],
-              ]),
+            child: Stack(
+              children: [
+                SingleChildScrollView(
+                  child: Column(mainAxisSize: MainAxisSize.min, children: [
+                    const Header(),
+                    SearchBar(
+                        controller: searchController,
+                        onFilter: (value) {
+                          setState(() {
+                            searchString = value.toLowerCase().toString();
+                          });
+                        },
+                        onSubmitted: (valorInputSearch) async {
+                          loadingPage();
+                          await fetchFilterCharacters(valorInputSearch);
+                          limparControlers();
+                          setState(() {
+                            searchString = '';
+                          });
+                          FocusScope.of(context).unfocus();
+                        },
+                        onTapFilter: () async {
+                          loadingPage();
+                          await fetchFilterCharacters(searchString);
+                          limparControlers();
+                          setState(() {
+                            searchString = '';
+                          });
+                          FocusScope.of(context).unfocus();
+                        },
+                        onTap: () async {
+                          loadingPage();
+                          refreshPage();
+                          limparControlers();
+                          setState(() {
+                            searchString = '';
+                          });
+                          FocusScope.of(context).unfocus();
+                        }),
+                    if (futureCharacterFilter.isEmpty) ...[
+                      if (searchString.isNotEmpty)
+                        ListViewCard(data: data, searchString: searchString),
+                      if (searchString.isEmpty || searchString == '')
+                        GridCard(
+                          listItens: data!,
+                        ),
+                    ] else if (futureCharacterFilter.isNotEmpty) ...[
+                      if (searchString.isNotEmpty)
+                        ListViewCard(
+                            data: futureCharacterFilter,
+                            searchString: searchString),
+                      if (searchString.isEmpty || searchString == '')
+                        GridCard(
+                          listItens: futureCharacterFilter,
+                        ),
+                    ],
+                  ]),
+                ),
+                isLoading
+                    ? Container(
+                        color: Colors.black.withOpacity(0.5),
+                        width: size.width,
+                        height: size.height,
+                        child: const Center(
+                            child: CircularProgressIndicator(
+                          color: primaryColor,
+                        )))
+                    : Container()
+              ],
             ),
           );
         }
-        return Container(
-          height: double.infinity,
-          width: double.infinity,
-          color: Colors.white,
-          child: const Center(child: CircularProgressIndicator()),
-        );
+        return SafeArea(
+            child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const Header(),
+              const SearchBar(
+                  onSubmitted: null,
+                  onTapFilter: null,
+                  onTap: null,
+                  onFilter: null,
+                  controller: null),
+              const SizedBox(
+                height: 20,
+              ),
+              GridView.count(
+                shrinkWrap: true,
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                physics: const BouncingScrollPhysics(),
+                crossAxisCount: 2,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+                childAspectRatio: 10 / 11.5,
+                children: List.generate(
+                  10,
+                  (index) => CustomShimmer(
+                    height: size.height,
+                    width: size.width,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ));
       },
     );
   }
