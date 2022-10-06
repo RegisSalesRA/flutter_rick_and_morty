@@ -3,9 +3,7 @@ import 'package:rick_and_morty/config/colors.dart';
 
 import '../modules/modules.dart';
 
-
 class BaseScreenView extends StatefulWidget {
-  
   const BaseScreenView({Key? key}) : super(key: key);
 
   @override
@@ -22,15 +20,7 @@ class _BaseScreenViewState extends State<BaseScreenView> {
       body: PageView(
         controller: pageController,
         physics: const NeverScrollableScrollPhysics(),
-        children: const [
-          Home(),
-          Center(
-            child: Text(
-              'Page 2',
-            ),
-          ),
-          SplashScreenQuiz()
-        ],
+        children: const [Home(), LocationScreen(), SplashScreenQuiz()],
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(

@@ -98,118 +98,148 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return FutureBuilder<List<Result>>(
-      future: futureCharacterList,
-      builder: (context, snapshot) {
-        if (snapshot.hasData && !snapshot.hasError) {
-          List<Result>? data = snapshot.data;
-          return SafeArea(
-            child: Stack(
-              children: [
-                SingleChildScrollView(
-                  child: Column(mainAxisSize: MainAxisSize.min, children: [
+        future: futureCharacterList,
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              break;
+            case ConnectionState.active:
+              break;
+            case ConnectionState.waiting:
+              return SafeArea(
+                  child: SingleChildScrollView(
+                child: Column(
+                  children: [
                     const Header(),
-                    SearchBar(
-                        controller: searchController,
-                        onFilter: (value) {
-                          setState(() {
-                            searchString = value.toLowerCase().toString();
-                          });
-                        },
-                        onSubmitted: (valorInputSearch) async {
-                          loadingPage();
-                          await fetchFilterCharacters(valorInputSearch);
-                          limparControlers();
-                          setState(() {
-                            searchString = '';
-                          });
-                          FocusScope.of(context).unfocus();
-                        },
-                        onTapFilter: () async {
-                          loadingPage();
-                          await fetchFilterCharacters(searchString);
-                          limparControlers();
-                          setState(() {
-                            searchString = '';
-                          });
-                          FocusScope.of(context).unfocus();
-                        },
-                        onTap: () async {
-                          loadingPage();
-                          refreshPage();
-                          limparControlers();
-                          setState(() {
-                            searchString = '';
-                          });
-                          FocusScope.of(context).unfocus();
-                        }),
-                    if (futureCharacterFilter.isEmpty) ...[
-                      if (searchString.isNotEmpty)
-                        ListViewCard(data: data, searchString: searchString),
-                      if (searchString.isEmpty || searchString == '')
-                        GridCard(
-                          listItens: data!,
+                    const SearchBar(
+                        onSubmitted: null,
+                        onTapFilter: null,
+                        onTap: null,
+                        onFilter: null,
+                        controller: null),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    GridView.count(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                      physics: const BouncingScrollPhysics(),
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
+                      childAspectRatio: 10 / 11.5,
+                      children: List.generate(
+                        10,
+                        (index) => CustomShimmer(
+                          height: size.height,
+                          width: size.width,
+                          borderRadius: BorderRadius.circular(20),
                         ),
-                    ] else if (futureCharacterFilter.isNotEmpty) ...[
-                      if (searchString.isNotEmpty)
-                        ListViewCard(
-                            data: futureCharacterFilter,
-                            searchString: searchString),
-                      if (searchString.isEmpty || searchString == '')
-                        GridCard(
-                          listItens: futureCharacterFilter,
-                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ));
+            case ConnectionState.done:
+              if (snapshot.hasData && !snapshot.hasError) {
+                List<Result>? data = snapshot.data;
+                return SafeArea(
+                  child: Stack(
+                    children: [
+                      SingleChildScrollView(
+                        child:
+                            Column(mainAxisSize: MainAxisSize.min, children: [
+                          const Header(),
+                          SearchBar(
+                              controller: searchController,
+                              onFilter: (value) {
+                                setState(() {
+                                  searchString = value.toLowerCase().toString();
+                                });
+                              },
+                              onSubmitted: (valorInputSearch) async {
+                                loadingPage();
+                                await fetchFilterCharacters(valorInputSearch);
+                                limparControlers();
+                                setState(() {
+                                  searchString = '';
+                                });
+                                FocusScope.of(context).unfocus();
+                              },
+                              onTapFilter: () async {
+                                loadingPage();
+                                await fetchFilterCharacters(searchString);
+                                limparControlers();
+                                setState(() {
+                                  searchString = '';
+                                });
+                                FocusScope.of(context).unfocus();
+                              },
+                              onTap: () async {
+                                loadingPage();
+                                refreshPage();
+                                limparControlers();
+                                setState(() {
+                                  searchString = '';
+                                });
+                                FocusScope.of(context).unfocus();
+                              }),
+                          if (futureCharacterFilter.isEmpty) ...[
+                            if (searchString.isNotEmpty)
+                              ListViewCard(
+                                  data: data, searchString: searchString),
+                            if (searchString.isEmpty || searchString == '')
+                              GridCard(
+                                listItens: data!,
+                              ),
+                          ] else if (futureCharacterFilter.isNotEmpty) ...[
+                            if (searchString.isNotEmpty)
+                              ListViewCard(
+                                  data: futureCharacterFilter,
+                                  searchString: searchString),
+                            if (searchString.isEmpty || searchString == '')
+                              GridCard(
+                                listItens: futureCharacterFilter,
+                              ),
+                          ],
+                        ]),
+                      ),
+                      isLoading
+                          ? Container(
+                              color: Colors.black.withOpacity(0.5),
+                              width: size.width,
+                              height: size.height,
+                              child: const Center(
+                                  child: CircularProgressIndicator(
+                                color: primaryColor,
+                              )))
+                          : Container()
                     ],
-                  ]),
-                ),
-                isLoading
-                    ? Container(
-                        color: Colors.black.withOpacity(0.5),
-                        width: size.width,
-                        height: size.height,
-                        child: const Center(
-                            child: CircularProgressIndicator(
-                          color: primaryColor,
-                        )))
-                    : Container()
-              ],
-            ),
-          );
-        }
-        return SafeArea(
-            child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const Header(),
-              const SearchBar(
-                  onSubmitted: null,
-                  onTapFilter: null,
-                  onTap: null,
-                  onFilter: null,
-                  controller: null),
-              const SizedBox(
-                height: 20,
-              ),
-              GridView.count(
-                shrinkWrap: true,
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                physics: const BouncingScrollPhysics(),
-                crossAxisCount: 2,
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
-                childAspectRatio: 10 / 11.5,
-                children: List.generate(
-                  10,
-                  (index) => CustomShimmer(
-                    height: size.height,
-                    width: size.width,
-                    borderRadius: BorderRadius.circular(20),
                   ),
-                ),
-              )
-            ],
-          ),
-        ));
-      },
-    );
+                );
+              } else {
+                return SafeArea(
+                    child: SingleChildScrollView(
+                        child: Column(children: [
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  const Header(),
+                  Image.asset(
+                    'assets/images/error.png',
+                    height: 350,
+                  ),
+                  const Text(
+                    "Erro ao se conectar",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ])));
+              }
+          }
+          return Container();
+        });
   }
 }
