@@ -230,10 +230,20 @@ class _HomeState extends State<Home> {
                     height: 350,
                   ),
                   const Text(
-                    "Erro ao se conectar",
+                    "Error connection",
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 25,
                       fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(25),
+                    child: const Text(
+                      "Please check your internet connection or try again later!",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   )
                 ])));
