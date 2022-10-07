@@ -381,14 +381,19 @@ class _DetailWidgetState extends State<DetailWidget> {
               ],
             ),
           ),
-          IconButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: Colors.white,
-              ))
+          Positioned(
+            top: 10,
+            left: 10,
+            child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: const Icon(
+                  Icons.arrow_back_rounded,
+                  size: 30.0,
+                  color: AppThemeLight.primaryColor,
+                )),
+          )
         ],
       )),
     );
