@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import '../../../../config/config.dart';
 
@@ -67,7 +68,7 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
                           "Type: ",
                           style: TextStyle(
                               overflow: TextOverflow.ellipsis,
-                              color: Colors.pink,
+                              color: AppThemeLight.titleDetail,
                               fontSize: 16,
                               fontWeight: FontWeight.bold),
                         ),
@@ -79,7 +80,7 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
                               maxLines: 1,
                               style: TextStyle(
                                   overflow: TextOverflow.ellipsis,
-                                  color: Colors.lightGreen,
+                                  color: AppThemeLight.subTitleDescription,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16),
                             ),
@@ -93,7 +94,7 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
                           "First Episode: ",
                           style: TextStyle(
                               overflow: TextOverflow.ellipsis,
-                              color: Colors.pink,
+                              color: AppThemeLight.titleDetail,
                               fontSize: 16,
                               fontWeight: FontWeight.bold),
                         ),
@@ -105,7 +106,7 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
                               maxLines: 1,
                               style: TextStyle(
                                   overflow: TextOverflow.ellipsis,
-                                  color: Colors.lightGreen,
+                                  color: AppThemeLight.subTitleDescription,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16),
                             ),
@@ -120,7 +121,7 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
                           "Dimension: ",
                           style: TextStyle(
                               overflow: TextOverflow.ellipsis,
-                              color: Colors.pink,
+                              color: AppThemeLight.titleDetail,
                               fontSize: 16,
                               fontWeight: FontWeight.bold),
                         ),
@@ -132,7 +133,7 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
                               maxLines: 1,
                               style: TextStyle(
                                   overflow: TextOverflow.ellipsis,
-                                  color: Colors.lightGreen,
+                                  color: AppThemeLight.subTitleDescription,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16),
                             ),
@@ -152,11 +153,47 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
               child: Text(
                 "Residents: ",
                 style: TextStyle(
-                    color: Colors.pink,
+                    color: AppThemeLight.titleDetail,
                     fontSize: 16,
                     fontWeight: FontWeight.bold),
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: GestureDetector(
+                onTap: () {},
+                child: SizedBox(
+                  height: 65,
+                  width: size.width,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemCount: 52,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        padding: EdgeInsets.only(left: 5),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                        width: 75,
+                        height: 65,
+                        child: ClipRRect(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(25)),
+                          child: Image.asset(
+                            "assets/images/earth.png",
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            )
           ]),
         ),
         Positioned(
@@ -168,7 +205,8 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
               },
               child: const Icon(
                 Icons.arrow_back_ios,
-                color: Colors.pink,
+                color: AppThemeLight.primaryColor,
+                size: 30.0,
               ),
             ))
       ],
