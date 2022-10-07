@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -210,7 +211,8 @@ class _HomeState extends State<Home> {
                               width: size.width,
                               height: size.height,
                               child: const Center(
-                                  child: CircularProgressIndicator(
+                                  child: CupertinoActivityIndicator(
+                                radius: 25,
                                 color: primaryColor,
                               )))
                           : Container()
