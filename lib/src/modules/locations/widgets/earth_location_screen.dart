@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-
 import '../../../../config/config.dart';
 
 class EarthLocationScreen extends StatefulWidget {
-  const EarthLocationScreen({Key? key}) : super(key: key);
+  final String? heroTag;
+  const EarthLocationScreen({Key? key, required this.heroTag})
+      : super(key: key);
 
   @override
   State<EarthLocationScreen> createState() => _EarthLocationScreenState();
@@ -24,7 +24,7 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
             SizedBox(
                 height: size.height * 0.40,
                 child: Hero(
-                    tag: 'widget.tag',
+                    tag: widget.heroTag!,
                     child: ClipRRect(
                       borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(50)),
