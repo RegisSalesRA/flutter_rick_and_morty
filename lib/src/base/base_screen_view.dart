@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/config/colors.dart';
+import 'package:rick_and_morty/config/theme_color.dart';
 
 import '../modules/modules.dart';
 
@@ -31,7 +31,7 @@ class _BaseScreenViewState extends State<BaseScreenView> {
           ),
         ),
         child: BottomNavigationBar(
-          backgroundColor: CustomColors.containerColor,
+          backgroundColor: AppThemeLight.primaryColor,
           elevation: 0,
           currentIndex: currentIndex,
           onTap: (index) {

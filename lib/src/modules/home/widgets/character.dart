@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/config/colors.dart';
+import 'package:rick_and_morty/config/theme_color.dart';
 
 class ChracterWidget extends StatelessWidget {
   final int? id;
@@ -22,7 +22,7 @@ class ChracterWidget extends StatelessWidget {
               ))),
       footer: Container(
           decoration: const BoxDecoration(
-            color: CustomColors.containerColor,
+            color: AppThemeLight.primaryColor,
             borderRadius: BorderRadius.all(Radius.circular(20)),
           ),
           height: 25,

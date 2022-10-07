@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../config/config.dart';
 import 'widgets.dart';
 
 class GridCard extends StatelessWidget {
@@ -60,8 +61,8 @@ class GridCard extends StatelessWidget {
                     listItens[index].name,
                     style: const TextStyle(
                         overflow: TextOverflow.ellipsis,
-                        color: Colors.black,
-                        fontSize: 12,
+                        color: AppThemeLight.primaryColor,
+                        fontSize: AppTextStyle.title,
                         fontWeight: FontWeight.bold),
                   ),
                 ),

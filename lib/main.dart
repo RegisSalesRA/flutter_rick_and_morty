@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:rick_and_morty/config/colors.dart';
+import 'package:rick_and_morty/config/theme_color.dart';
 import 'src/base/base_screen_view.dart';
 
 void main() => runApp(const MyApp());
@@ -19,7 +19,8 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Rick and Morty',
-      theme: ThemeData(primaryColor: primaryColor, fontFamily: 'Poppins'),
+      theme: ThemeData(
+          primaryColor: AppThemeLight.primaryColor, fontFamily: 'Poppins'),
       home: const BaseScreenView(),
     );
   }

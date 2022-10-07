@@ -213,7 +213,7 @@ class _HomeState extends State<Home> {
                               child: const Center(
                                   child: CupertinoActivityIndicator(
                                 radius: 25,
-                                color: primaryColor,
+                                color: AppThemeLight.primaryColor,
                               )))
                           : Container()
                     ],

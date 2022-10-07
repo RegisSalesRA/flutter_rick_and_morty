@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/config/colors.dart';
+import 'package:rick_and_morty/config/theme_color.dart';
 import 'package:rick_and_morty/src/modules/home/home_view.dart';
 
 class SplashScreenQuiz extends StatefulWidget {
@@ -9,7 +9,8 @@ class SplashScreenQuiz extends StatefulWidget {
   State<SplashScreenQuiz> createState() => _SplashScreenQuizState();
 }
 
-class _SplashScreenQuizState extends State<SplashScreenQuiz> with TickerProviderStateMixin {
+class _SplashScreenQuizState extends State<SplashScreenQuiz>
+    with TickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
     duration: const Duration(seconds: 6),
     vsync: this,
@@ -78,7 +79,7 @@ class _SplashScreenQuizState extends State<SplashScreenQuiz> with TickerProvider
                   decoration: BoxDecoration(
                     boxShadow: kElevationToShadow[500],
                     borderRadius: BorderRadius.circular(35.0),
-                    color: CustomColors.containerColor,
+                    color: AppThemeLight.primaryColor,
                   ),
                   child: const Center(
                       child: Text(

@@ -40,7 +40,7 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
               child: Text(
                 "Earth",
                 style: TextStyle(
-                    color: primaryColor,
+                    color: AppThemeLight.primaryColor,
                     fontSize: 30,
                     fontWeight: FontWeight.bold),
               ),

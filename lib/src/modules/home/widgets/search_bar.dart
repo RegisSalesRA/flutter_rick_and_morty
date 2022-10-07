@@ -43,7 +43,7 @@ class SearchBar extends StatelessWidget {
               child: const Icon(
                 Icons.search,
                 size: 25,
-                color: CustomColors.containerColor,
+                color: AppThemeLight.primaryColor,
               ),
             ),
           ),
@@ -56,7 +56,7 @@ class SearchBar extends StatelessWidget {
               child: const Icon(
                 Icons.refresh,
                 size: 25,
-                color: CustomColors.containerColor,
+                color: AppThemeLight.primaryColor,
               ),
             ),
           ),

@@ -94,7 +94,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 height: 10,
                                 width: 10,
                                 decoration: const BoxDecoration(
-                                    color: Colors.green,
+                                    color: AppThemeLight.alive,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(100))),
                               ),
@@ -103,7 +103,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 height: 10,
                                 width: 10,
                                 decoration: const BoxDecoration(
-                                    color: Colors.red,
+                                    color: AppThemeLight.dead,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(100))),
                               ),
@@ -112,7 +112,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 height: 10,
                                 width: 10,
                                 decoration: const BoxDecoration(
-                                    color: Colors.yellow,
+                                    color: AppThemeLight.unknow,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(100))),
                               ),
@@ -122,33 +122,33 @@ class _DetailWidgetState extends State<DetailWidget> {
                               child: Text(
                                 widget.name,
                                 style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: CustomText.titulo,
+                                    color: AppThemeLight.primaryColor,
+                                    fontSize: AppTextStyle.titulo,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
                             if (widget.status == Status.ALIVE)
                               const Text(
-                                "( Alive )",
+                                "( ALIVE )",
                                 style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
+                                    color: AppThemeLight.alive,
+                                    fontSize: AppTextStyle.titulo,
                                     fontWeight: FontWeight.bold),
                               ),
                             if (widget.status == Status.DEAD)
                               const Text(
-                                "( Dead )",
+                                "( DEAD )",
                                 style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
+                                    color: AppThemeLight.dead,
+                                    fontSize: AppTextStyle.titulo,
                                     fontWeight: FontWeight.bold),
                               ),
                             if (widget.status == Status.UNKNOWN)
                               const Text(
-                                "( Unknow )",
+                                "( UNKNOW )",
                                 style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
+                                    color: AppThemeLight.unknow,
+                                    fontSize: AppTextStyle.titulo,
                                     fontWeight: FontWeight.bold),
                               ),
                           ],
@@ -178,8 +178,8 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 "Origin: ",
                                 style: TextStyle(
                                     overflow: TextOverflow.ellipsis,
-                                    color: Colors.black,
-                                    fontSize: CustomText.titulo,
+                                    color: AppThemeLight.titleDetail,
+                                    fontSize: AppTextStyle.titulo,
                                     fontWeight: FontWeight.bold),
                               ),
                               Expanded(
@@ -190,8 +190,9 @@ class _DetailWidgetState extends State<DetailWidget> {
                                     maxLines: 1,
                                     style: const TextStyle(
                                         overflow: TextOverflow.ellipsis,
-                                        color: Colors.black,
-                                        fontSize: 16),
+                                        color:
+                                            AppThemeLight.subTitleDescription,
+                                        fontSize: AppTextStyle.titulo),
                                   ),
                                 ),
                               ),
@@ -203,8 +204,8 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 "Location: ",
                                 style: TextStyle(
                                     overflow: TextOverflow.ellipsis,
-                                    color: Colors.black,
-                                    fontSize: CustomText.titulo,
+                                    color: AppThemeLight.titleDetail,
+                                    fontSize: AppTextStyle.titulo,
                                     fontWeight: FontWeight.bold),
                               ),
                               Expanded(
@@ -215,8 +216,9 @@ class _DetailWidgetState extends State<DetailWidget> {
                                     maxLines: 1,
                                     style: const TextStyle(
                                         overflow: TextOverflow.ellipsis,
-                                        color: Colors.black,
-                                        fontSize: 16),
+                                        color:
+                                            AppThemeLight.subTitleDescription,
+                                        fontSize: AppTextStyle.titulo),
                                   ),
                                 ),
                               ),
@@ -228,8 +230,8 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 "Gender: ",
                                 style: TextStyle(
                                     overflow: TextOverflow.ellipsis,
-                                    color: Colors.black,
-                                    fontSize: CustomText.titulo,
+                                    color: AppThemeLight.titleDetail,
+                                    fontSize: AppTextStyle.titulo,
                                     fontWeight: FontWeight.bold),
                               ),
                               if (widget.gender == Gender.MALE)
@@ -239,7 +241,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                     'Male',
                                     style: TextStyle(
                                       overflow: TextOverflow.ellipsis,
-                                      color: Colors.black,
+                                      color: AppThemeLight.subTitleDescription,
                                     ),
                                   ),
                                 ),
@@ -250,7 +252,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                     'Female',
                                     style: TextStyle(
                                       overflow: TextOverflow.ellipsis,
-                                      color: Colors.black,
+                                      color: AppThemeLight.subTitleDescription,
                                     ),
                                   ),
                                 ),
@@ -261,9 +263,9 @@ class _DetailWidgetState extends State<DetailWidget> {
                               const Text(
                                 "Species: ",
                                 style: TextStyle(
-                                    color: Colors.black,
+                                    color: AppThemeLight.titleDetail,
                                     overflow: TextOverflow.ellipsis,
-                                    fontSize: CustomText.titulo,
+                                    fontSize: AppTextStyle.titulo,
                                     fontWeight: FontWeight.bold),
                               ),
                               if (widget.species == Species.HUMAN)
@@ -272,7 +274,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                   child: Text(
                                     'Human',
                                     style: TextStyle(
-                                      color: Colors.black,
+                                      color: AppThemeLight.subTitleDescription,
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
@@ -283,7 +285,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                   child: Text(
                                     'Alien',
                                     style: TextStyle(
-                                      color: Colors.black,
+                                      color: AppThemeLight.subTitleDescription,
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
@@ -295,9 +297,9 @@ class _DetailWidgetState extends State<DetailWidget> {
                               const Text(
                                 "Nº Episodes: ",
                                 style: TextStyle(
-                                    color: Colors.black,
+                                    color: AppThemeLight.titleDetail,
                                     overflow: TextOverflow.ellipsis,
-                                    fontSize: CustomText.titulo,
+                                    fontSize: AppTextStyle.titulo,
                                     fontWeight: FontWeight.bold),
                               ),
                               AnimatedFadedText(
@@ -305,7 +307,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 child: Text(
                                   "${widget.episode.length}",
                                   style: const TextStyle(
-                                    color: Colors.black,
+                                    color: AppThemeLight.subTitleDescription,
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
@@ -316,8 +318,8 @@ class _DetailWidgetState extends State<DetailWidget> {
                             height: 10,
                           ),
                           ExpansionTile(
-                            textColor: primaryColor,
-                            iconColor: primaryColor,
+                            textColor: AppThemeLight.primaryColor,
+                            iconColor: AppThemeLight.primaryColor,
                             tilePadding: const EdgeInsets.only(right: 20),
                             title: const Text(
                               "Episodes",
@@ -337,12 +339,30 @@ class _DetailWidgetState extends State<DetailWidget> {
                                       itemBuilder: (context, index) {
                                         return Column(
                                           children: [
-                                            Text(episodesByCharactersList[index]
-                                                .name),
-                                            Text(episodesByCharactersList[index]
-                                                .airDate),
-                                            Text(episodesByCharactersList[index]
-                                                .episode),
+                                            Text(
+                                              episodesByCharactersList[index]
+                                                  .name,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: AppThemeLight
+                                                      .primaryColor),
+                                            ),
+                                            Text(
+                                              episodesByCharactersList[index]
+                                                  .airDate,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: AppThemeLight
+                                                      .primaryColor),
+                                            ),
+                                            Text(
+                                              episodesByCharactersList[index]
+                                                  .episode,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: AppThemeLight
+                                                      .primaryColor),
+                                            ),
                                             Divider(
                                               thickness: 2,
                                               color: Colors.grey.shade200,
