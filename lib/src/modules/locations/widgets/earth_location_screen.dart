@@ -76,8 +76,7 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
             case ConnectionState.done:
               if (snapshot.hasData && !snapshot.hasError) {
                 LocationPlace? data = snapshot.data;
-                return Scaffold(
-                    body: SafeArea(
+                return  SafeArea(
                         child: Stack(
                   children: [
                     SingleChildScrollView(
@@ -177,7 +176,7 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
                           ),
                         ))
                   ],
-                )));
+                ));
               } else {
                 return const ErrorConnection();
               }

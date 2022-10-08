@@ -9,8 +9,7 @@ class LocationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: Center(
+      child:  Center(
             child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SingleChildScrollView(
@@ -37,7 +36,7 @@ class LocationScreen extends StatelessWidget {
             ),
           ),
         )),
-      ),
+    
     );
   }
 }
