@@ -69,32 +69,86 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
             case ConnectionState.active:
               break;
             case ConnectionState.waiting:
-              return Scaffold(
-                body: SafeArea(
-                    child: SingleChildScrollView(
-                  child: Column(
+              return SingleChildScrollView(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Header(),
-                      GridView.count(
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                        physics: const BouncingScrollPhysics(),
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 8,
-                        crossAxisSpacing: 8,
-                        childAspectRatio: 10 / 11.5,
-                        children: List.generate(
-                          10,
-                          (index) => CustomShimmer(
-                            height: size.height,
+                      SizedBox(
+                          height: size.height * 0.40,
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                                bottomLeft: Radius.circular(50)),
+                            child: Image.asset(
+                              'assets/images/earth.png',
+                              fit: BoxFit.fill,
+                            ),
+                          )),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: CustomShimmer(
+                          height: 50,
+                          width: 200,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: CustomShimmer(
+                          height: 125,
+                          width: double.infinity,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: CustomShimmer(
+                          height: 35,
+                          width: 125,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: SizedBox(
+                            height: 65,
                             width: size.width,
-                            borderRadius: BorderRadius.circular(20),
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              itemCount: 10,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  decoration: const BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(25)),
+                                  ),
+                                  width: 75,
+                                  height: 65,
+                                  child: const CustomShimmer(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(25)),
+                                    height: 89,
+                                    width: 80,
+                                  ),
+                                );
+                              },
+                            ),
                           ),
                         ),
                       )
-                    ],
-                  ),
-                )),
+                    ]),
               );
 
             case ConnectionState.done:
@@ -329,37 +383,9 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
                         ))
                   ],
                 )));
+              } else {
+                return const ErrorConnection();
               }
-
-              SafeArea(
-                  child: SingleChildScrollView(
-                      child: Column(children: [
-                const SizedBox(
-                  height: 25,
-                ),
-                const Header(),
-                Image.asset(
-                  'assets/images/error.png',
-                  height: 350,
-                ),
-                const Text(
-                  "Error connection",
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(25),
-                  child: const Text(
-                    "Please check your internet connection or try again later!",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                )
-              ])));
           }
 
           return Container();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/config/config.dart';
+import 'package:rick_and_morty/src/modules/locations/widgets/cidatel_location.dart';
 import 'package:rick_and_morty/src/modules/locations/widgets/earth_location_screen.dart';
 
 import '../../components/components.dart';
@@ -56,7 +57,10 @@ class LocationScreen extends StatelessWidget {
                       ]),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const CidatelLocationScreen()));
+                  },
                   child: Container(
                     decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(20))),

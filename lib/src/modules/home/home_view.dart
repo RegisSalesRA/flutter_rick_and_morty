@@ -22,7 +22,6 @@ class _HomeState extends State<Home> {
   List<Result> futureCharacterFilter = [];
   String searchString = "";
   bool isLoading = false;
-  
 
   Future<List<Result>> fetchCharacters(pageNumber) async {
     final response = await http.get(Uri.parse(
@@ -222,35 +221,7 @@ class _HomeState extends State<Home> {
                   ),
                 );
               } else {
-                return SafeArea(
-                    child: SingleChildScrollView(
-                        child: Column(children: [
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  const Header(),
-                  Image.asset(
-                    'assets/images/error.png',
-                    height: 350,
-                  ),
-                  const Text(
-                    "Error connection",
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(25),
-                    child: const Text(
-                      "Please check your internet connection or try again later!",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )
-                ])));
+                return const ErrorConnection();
               }
           }
           return Container();

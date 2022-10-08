@@ -268,40 +268,16 @@ class _DetailWidgetState extends State<DetailWidget> {
                                     fontSize: AppTextStyle.titulo,
                                     fontWeight: FontWeight.bold),
                               ),
-                              if (widget.species == Species.HUMAN)
-                                const AnimatedFadedText(
-                                  direction: 1,
-                                  child: Text(
-                                    'Human',
-                                    style: TextStyle(
-                                      color: AppThemeLight.subTitleDescription,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
+                              AnimatedFadedText(
+                                direction: 1,
+                                child: Text(
+                                  widget.species,
+                                  style: const TextStyle(
+                                    color: AppThemeLight.subTitleDescription,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
-                              if (widget.species == Species.ALIEN)
-                                const AnimatedFadedText(
-                                  direction: 1,
-                                  child: Text(
-                                    'Alien',
-                                    style: TextStyle(
-                                      color: AppThemeLight.subTitleDescription,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ),
-                              if (widget.species != Species.ALIEN ||
-                                  widget.species != Species.HUMAN)
-                                const AnimatedFadedText(
-                                  direction: 1,
-                                  child: Text(
-                                    'Unknow',
-                                    style: TextStyle(
-                                      color: AppThemeLight.subTitleDescription,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ),
+                              ),
                             ],
                           ),
                           Row(
