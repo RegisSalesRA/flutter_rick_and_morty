@@ -8,35 +8,38 @@ class LocationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child:  Center(
-            child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const Header(),
-                ChoiceLocation(
-                  title: 'Earth',
-                  label: 'Planet',
-                  image: Image.asset(
-                    'assets/images/earth.png',
+    return Material(
+      child: Scaffold(
+        body: SafeArea(
+          child: Center(
+              child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const Header(),
+                  ChoiceLocation(
+                    title: 'Earth',
+                    label: 'Planet',
+                    image: Image.asset(
+                      'assets/images/earth.png',
+                    ),
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const EarthLocationScreen())),
                   ),
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const EarthLocationScreen())),
-                ),
-                ChoiceLocation(
-                  title: 'Cidatel of Ricks',
-                  label: 'Space Stadium',
-                  image: Image.asset('assets/images/cidatel.png'),
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const CidatelLocationScreen())),
-                ),
-              ],
+                  ChoiceLocation(
+                    title: 'Cidatel of Ricks',
+                    label: 'Space Stadium',
+                    image: Image.asset('assets/images/cidatel.png'),
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const CidatelLocationScreen())),
+                  ),
+                ],
+              ),
             ),
-          ),
-        )),
-    
+          )),
+        ),
+      ),
     );
   }
 }
