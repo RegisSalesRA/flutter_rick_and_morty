@@ -13,7 +13,7 @@ class DetailWidget extends StatefulWidget {
   final String location;
   final String origin;
   final Gender gender;
-  final Species species;
+  final String species;
   final Status status;
   final List<String> episode;
 
@@ -284,6 +284,18 @@ class _DetailWidgetState extends State<DetailWidget> {
                                   direction: 1,
                                   child: Text(
                                     'Alien',
+                                    style: TextStyle(
+                                      color: AppThemeLight.subTitleDescription,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+                              if (widget.species != Species.ALIEN ||
+                                  widget.species != Species.HUMAN)
+                                const AnimatedFadedText(
+                                  direction: 1,
+                                  child: Text(
+                                    'Unknow',
                                     style: TextStyle(
                                       color: AppThemeLight.subTitleDescription,
                                       overflow: TextOverflow.ellipsis,

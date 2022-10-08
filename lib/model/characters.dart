@@ -69,7 +69,7 @@ class Result {
   late int id;
   late String name;
   Status? status;
-  Species? species;
+  String? species;
   late String type;
   Gender? gender;
   late Location origin;
@@ -83,7 +83,7 @@ class Result {
         id: json["id"],
         name: json["name"],
         status: statusValues.map[json["status"]],
-        species: speciesValues.map[json["species"]],
+        species: json["species"],
         type: json["type"],
         gender: genderValues.map[json["gender"]],
         origin: Location.fromJson(json["origin"]),
@@ -109,7 +109,6 @@ class Result {
         "created": created.toIso8601String(),
       };
 }
-
 
 enum Gender { MALE, FEMALE, UNKNOWN }
 
