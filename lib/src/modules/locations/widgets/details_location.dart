@@ -17,7 +17,7 @@ class DetailsLocation extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          title,
+          '$title ',
           style: const TextStyle(
               overflow: TextOverflow.ellipsis,
               color: AppThemeLight.titleDetail,
