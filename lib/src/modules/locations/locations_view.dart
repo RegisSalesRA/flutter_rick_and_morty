@@ -22,19 +22,16 @@ class LocationScreen extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>
-                            const EarthLocationScreen(heroTag: 'earth')));
+                        builder: (context) => const EarthLocationScreen()));
                   },
                   child: Container(
                     decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     child: ClipRRect(
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      child: Hero(
-                          tag: 'earth',
-                          child: Image.asset(
-                            'assets/images/earth.png',
-                          )),
+                      child: Image.asset(
+                        'assets/images/earth.png',
+                      ),
                     ),
                   ),
                 ),

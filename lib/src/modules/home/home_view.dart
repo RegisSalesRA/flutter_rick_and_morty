@@ -22,6 +22,7 @@ class _HomeState extends State<Home> {
   List<Result> futureCharacterFilter = [];
   String searchString = "";
   bool isLoading = false;
+  
 
   Future<List<Result>> fetchCharacters(pageNumber) async {
     final response = await http.get(Uri.parse(
