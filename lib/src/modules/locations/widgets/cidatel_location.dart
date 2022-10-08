@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:rick_and_morty/src/modules/locations/widgets/list_residents_widget.dart';
 import '../../../../config/config.dart';
 import '../../../../model/model.dart';
 import '../../../components/components.dart';
-import '../../home/widgets/widgets.dart';
+import 'widgets.dart';
 
 class CidatelLocationScreen extends StatefulWidget {
   const CidatelLocationScreen({
@@ -17,8 +18,8 @@ class CidatelLocationScreen extends StatefulWidget {
 }
 
 class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
-  var residentsByLocationUrl = [];
-  var residentsByLocation = [];
+  List<String> residentsByLocationUrl = [];
+  List<Result> residentsByLocation = [];
   late Future<LocationPlace> futureLocation;
 
   Future<LocationPlace> fetchEarchLocation() async {
@@ -69,88 +70,7 @@ class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
             case ConnectionState.active:
               break;
             case ConnectionState.waiting:
-              return SingleChildScrollView(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                          height: size.height * 0.40,
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                                bottomLeft: Radius.circular(50)),
-                            child: Image.asset(
-                              'assets/images/cidatel.png',
-                              fit: BoxFit.fill,
-                            ),
-                          )),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: CustomShimmer(
-                          height: 50,
-                          width: 200,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: CustomShimmer(
-                          height: 125,
-                          width: double.infinity,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: CustomShimmer(
-                          height: 35,
-                          width: 125,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: SizedBox(
-                            height: 65,
-                            width: size.width,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              shrinkWrap: true,
-                              itemCount: 10,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Container(
-                                  padding: const EdgeInsets.only(left: 5),
-                                  decoration: const BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(25)),
-                                  ),
-                                  width: 75,
-                                  height: 65,
-                                  child: const CustomShimmer(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(25)),
-                                    height: 89,
-                                    width: 80,
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                      )
-                    ]),
-              );
-
+              return const CustomShimmerLocation();
             case ConnectionState.done:
               if (snapshot.hasData && !snapshot.hasError) {
                 LocationPlace? data = snapshot.data;
@@ -163,7 +83,7 @@ class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                                height: size.height * 0.40,
+                                height: 300,
                                 child: ClipRRect(
                                   borderRadius: const BorderRadius.only(
                                       bottomLeft: Radius.circular(50)),
@@ -208,54 +128,13 @@ class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
                                       MainAxisAlignment.spaceEvenly,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Row(
-                                      children: [
-                                        const Text(
-                                          "Type: ",
-                                          style: TextStyle(
-                                              overflow: TextOverflow.ellipsis,
-                                              color: AppThemeLight.titleDetail,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            data.type,
-                                            maxLines: 1,
-                                            style: const TextStyle(
-                                                overflow: TextOverflow.ellipsis,
-                                                color: AppThemeLight
-                                                    .subTitleDescription,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16),
-                                          ),
-                                        ),
-                                      ],
+                                    DetailsLocation(
+                                      title: "Type",
+                                      description: data.type,
                                     ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        const Text(
-                                          "Dimension: ",
-                                          style: TextStyle(
-                                              overflow: TextOverflow.ellipsis,
-                                              color: AppThemeLight.titleDetail,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                            data.dimension,
-                                            maxLines: 1,
-                                            style: const TextStyle(
-                                                overflow: TextOverflow.ellipsis,
-                                                color: AppThemeLight
-                                                    .subTitleDescription,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16),
-                                          ),
-                                        ),
-                                      ],
+                                    DetailsLocation(
+                                      title: "Dimension",
+                                      description: data.dimension,
                                     ),
                                   ],
                                 ),
@@ -277,74 +156,9 @@ class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
                             const SizedBox(
                               height: 10,
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 20),
-                              child: GestureDetector(
-                                onTap: () {},
-                                child: SizedBox(
-                                  height: 65,
-                                  width: size.width,
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    shrinkWrap: true,
-                                    itemCount: residentsByLocation.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return Container(
-                                        padding: const EdgeInsets.only(left: 5),
-                                        decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(25)),
-                                        ),
-                                        width: 75,
-                                        height: 65,
-                                        child: InkWell(
-                                          onTap: () {
-                                            Navigator.of(context).push(MaterialPageRoute(
-                                                builder: (context) => DetailWidget(
-                                                    image: residentsByLocation[index]
-                                                        .image,
-                                                    tag: residentsByLocation[index]
-                                                        .id
-                                                        .toString(),
-                                                    name: residentsByLocation[index]
-                                                        .name,
-                                                    location:
-                                                        residentsByLocation[index]
-                                                            .location
-                                                            .name,
-                                                    origin: residentsByLocation[index]
-                                                        .origin
-                                                        .name,
-                                                    gender:
-                                                        residentsByLocation[index]
-                                                            .gender,
-                                                    species:
-                                                        residentsByLocation[index]
-                                                            .species,
-                                                    status:
-                                                        residentsByLocation[index]
-                                                            .status,
-                                                    episode:
-                                                        residentsByLocation[index]
-                                                            .episode)));
-                                          },
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(25)),
-                                            child: Image.network(
-                                                residentsByLocation[index]
-                                                    .image),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ),
-                            )
+                            ListResidentsWidget(
+                              lista: residentsByLocation,
+                            ),
                           ]),
                     ),
                     Positioned(
@@ -366,7 +180,6 @@ class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
                 return const ErrorConnection();
               }
           }
-
           return Container();
         });
   }
