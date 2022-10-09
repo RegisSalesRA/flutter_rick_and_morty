@@ -70,7 +70,6 @@ class _SplashScreenQuizState extends State<SplashScreenQuiz>
               scale: _animation,
               child: InkWell(
                 onTap: () {
-                  print("Tela da screen");
                   // Navigator.of(context).pushReplacement(_createRoute());
                 },
                 child: Container(

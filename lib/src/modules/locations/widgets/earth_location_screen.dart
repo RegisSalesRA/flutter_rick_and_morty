@@ -5,8 +5,6 @@ import 'package:http/http.dart' as http;
 import '../../../../config/config.dart';
 import '../../../../model/model.dart';
 import '../../../components/components.dart';
-import '../../home/widgets/widgets.dart';
-import 'custom_shimmer_location.dart';
 import 'list_residents_widget.dart';
 import 'widgets.dart';
 
