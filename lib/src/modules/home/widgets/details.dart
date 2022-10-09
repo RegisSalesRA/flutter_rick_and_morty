@@ -127,30 +127,6 @@ class _DetailWidgetState extends State<DetailWidget> {
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
-                            if (widget.status == Status.ALIVE)
-                              const Text(
-                                "( ALIVE )",
-                                style: TextStyle(
-                                    color: AppThemeLight.alive,
-                                    fontSize: AppTextStyle.titulo,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            if (widget.status == Status.DEAD)
-                              const Text(
-                                "( DEAD )",
-                                style: TextStyle(
-                                    color: AppThemeLight.dead,
-                                    fontSize: AppTextStyle.titulo,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            if (widget.status == Status.UNKNOWN)
-                              const Text(
-                                "( UNKNOW )",
-                                style: TextStyle(
-                                    color: AppThemeLight.unknow,
-                                    fontSize: AppTextStyle.titulo,
-                                    fontWeight: FontWeight.bold),
-                              ),
                           ],
                         ),
                       ),
@@ -172,6 +148,42 @@ class _DetailWidgetState extends State<DetailWidget> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          Row(
+                            children: [
+                              const Text(
+                                "Status: ",
+                                style: TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    color: AppThemeLight.titleDetail,
+                                    fontSize: AppTextStyle.titulo,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              if (widget.status == Status.ALIVE)
+                                const Text(
+                                  "( ALIVE )",
+                                  style: TextStyle(
+                                      color: AppThemeLight.alive,
+                                      fontSize: AppTextStyle.titulo,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              if (widget.status == Status.DEAD)
+                                const Text(
+                                  "( DEAD )",
+                                  style: TextStyle(
+                                      color: AppThemeLight.dead,
+                                      fontSize: AppTextStyle.titulo,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              if (widget.status == Status.UNKNOWN)
+                                const Text(
+                                  "( UNKNOW )",
+                                  style: TextStyle(
+                                      color: AppThemeLight.unknow,
+                                      fontSize: AppTextStyle.titulo,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                            ],
+                          ),
                           Row(
                             children: [
                               const Text(
