@@ -23,9 +23,9 @@ class _HomeState extends State<Home> {
   String searchString = "";
   bool isLoading = false;
 
-  Future<List<Result>> fetchCharacters(pageNumber) async {
-    final response = await http.get(Uri.parse(
-        'https://rickandmortyapi.com/api/character/?page=${pageNumber.toString()}'));
+  Future<List<Result>> fetchCharacters() async {
+    final response =
+        await http.get(Uri.parse('https://rickandmortyapi.com/api/character'));
 
     if (response.statusCode == 200) {
       var jsonResponse = json.decode(response.body);
@@ -86,7 +86,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    futureCharacterList = fetchCharacters(1);
+    futureCharacterList = fetchCharacters();
     refreshPage();
   }
 
@@ -108,40 +108,7 @@ class _HomeState extends State<Home> {
             case ConnectionState.active:
               break;
             case ConnectionState.waiting:
-              return SafeArea(
-                  child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const Header(),
-                    const SearchBar(
-                        onSubmitted: null,
-                        onTapFilter: null,
-                        onTap: null,
-                        onFilter: null,
-                        controller: null),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    GridView.count(
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                      physics: const BouncingScrollPhysics(),
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 8,
-                      crossAxisSpacing: 8,
-                      childAspectRatio: 10 / 11.5,
-                      children: List.generate(
-                        10,
-                        (index) => CustomShimmer(
-                          height: size.height,
-                          width: size.width,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ));
+              return const ShimmerCharacters();
             case ConnectionState.done:
               if (snapshot.hasData && !snapshot.hasError) {
                 List<Result>? data = snapshot.data;
