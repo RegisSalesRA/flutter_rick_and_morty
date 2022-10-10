@@ -1,68 +1,40 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:rick_and_morty/src/modules/locations/widgets/list_residents_widget.dart';
 import '../../../../config/config.dart';
 import '../../../../model/model.dart';
 import '../../../components/components.dart';
-import 'widgets.dart';
-
-class CidatelLocationScreen extends StatefulWidget {
-  const CidatelLocationScreen({
+import '../repository/location_repository.dart';
+import '../widgets/widgets.dart'; 
+class EarthLocationScreen extends StatefulWidget {
+  const EarthLocationScreen({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<CidatelLocationScreen> createState() => _CidatelLocationScreenState();
+  State<EarthLocationScreen> createState() => _EarthLocationScreenState();
 }
 
-class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
-  List<Result> residentsByLocation = [];
-  late Future<LocationPlace> futureLocation;
-
-  Future<LocationPlace> fetchEarchLocation() async {
-    final response =
-        await http.get(Uri.parse('https://rickandmortyapi.com/api/location/3'));
-
-    if (response.statusCode == 200) {
-      var locationFetch = LocationPlace.fromJson(jsonDecode(response.body));
-
-      return locationFetch;
-    } else {
-      throw Exception('Failed to load location');
-    }
-  }
-
-  Future<void> fetchEarchLocationResidents() async {
-    final response =
-        await http.get(Uri.parse('https://rickandmortyapi.com/api/location/3'));
-    var locationFetch = LocationPlace.fromJson(jsonDecode(response.body));
-
-    for (var item in locationFetch.residents) {
-      final response = await http.get(Uri.parse(item));
-      var value = Result.fromJson(jsonDecode(response.body));
-
-      if (!mounted) return;
-      setState(() {
-        residentsByLocation.add(value);
-      });
-    }
-  }
+class _EarthLocationScreenState extends State<EarthLocationScreen> {
+  late RepositoryLocationImp repositoryLocationImp = RepositoryLocationImp();
+  late List<Result> residentsByLocation =
+      repositoryLocationImp.residentsByLocation;
 
   @override
   void initState() {
     super.initState();
-    fetchEarchLocationResidents();
-    futureLocation = fetchEarchLocation();
+    repositoryLocationImp
+        .fetchEarchLocationResidents(residentsByLocation)
+        .then((value) {
+      setState(() {});
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Material(
       child: Scaffold(
         body: FutureBuilder<LocationPlace>(
-            future: futureLocation,
+            future: repositoryLocationImp.fetchEarchLocation(),
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
@@ -82,12 +54,12 @@ class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(
-                                    height: 300,
+                                    height: size.height * 0.40,
                                     child: ClipRRect(
                                       borderRadius: const BorderRadius.only(
                                           bottomLeft: Radius.circular(50)),
                                       child: Image.asset(
-                                        'assets/images/cidatel.png',
+                                        'assets/images/earth.png',
                                         fit: BoxFit.fill,
                                       ),
                                     )),
@@ -180,6 +152,7 @@ class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
                     return const ErrorConnection();
                   }
               }
+
               return Container();
             }),
       ),

@@ -2,59 +2,63 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:rick_and_morty/src/modules/locations/widgets/list_residents_widget.dart';
 import '../../../../config/config.dart';
 import '../../../../model/model.dart';
 import '../../../components/components.dart';
-import '../repository/location_repository.dart';
-import 'list_residents_widget.dart';
-import 'widgets.dart';
+import '../widgets/widgets.dart'; 
 
-class EarthLocationScreen extends StatefulWidget {
-  const EarthLocationScreen({
+class CidatelLocationScreen extends StatefulWidget {
+  const CidatelLocationScreen({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<EarthLocationScreen> createState() => _EarthLocationScreenState();
+  State<CidatelLocationScreen> createState() => _CidatelLocationScreenState();
 }
 
-class _EarthLocationScreenState extends State<EarthLocationScreen> {
-  late RepositoryLocationImp repositoryLocationImp = RepositoryLocationImp();
-  //Location
-  late Future<LocationPlace> futureLocation =
-      repositoryLocationImp.futureLocation;
-  late Future<LocationPlace> futureLocationFetch =
-      repositoryLocationImp.fetchEarchLocation();
-  //Residents
-  late List<Result> residentsByLocation =
-      repositoryLocationImp.residentsByLocation;
+class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
+  List<Result> residentsByLocation = [];
+  late Future<LocationPlace> futureLocation;
 
-  Future<List<Result>> fetchEarchLocationResidents(lista) async {
+  Future<LocationPlace> fetchEarchLocation() async {
     final response =
-        await http.get(Uri.parse('https://rickandmortyapi.com/api/location/1'));
+        await http.get(Uri.parse('https://rickandmortyapi.com/api/location/3'));
+
+    if (response.statusCode == 200) {
+      var locationFetch = LocationPlace.fromJson(jsonDecode(response.body));
+
+      return locationFetch;
+    } else {
+      throw Exception('Failed to load location');
+    }
+  }
+
+  Future<void> fetchEarchLocationResidents() async {
+    final response =
+        await http.get(Uri.parse('https://rickandmortyapi.com/api/location/3'));
     var locationFetch = LocationPlace.fromJson(jsonDecode(response.body));
 
     for (var item in locationFetch.residents) {
       final response = await http.get(Uri.parse(item));
       var value = Result.fromJson(jsonDecode(response.body));
 
+      if (!mounted) return;
       setState(() {
-        lista.add(value);
+        residentsByLocation.add(value);
       });
     }
-    return lista;
   }
 
   @override
   void initState() {
     super.initState();
-    fetchEarchLocationResidents(residentsByLocation);
-    futureLocation = futureLocationFetch;
+    fetchEarchLocationResidents;
+    futureLocation = fetchEarchLocation();
   }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Material(
       child: Scaffold(
         body: FutureBuilder<LocationPlace>(
@@ -78,12 +82,12 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(
-                                    height: size.height * 0.40,
+                                    height: 300,
                                     child: ClipRRect(
                                       borderRadius: const BorderRadius.only(
                                           bottomLeft: Radius.circular(50)),
                                       child: Image.asset(
-                                        'assets/images/earth.png',
+                                        'assets/images/cidatel.png',
                                         fit: BoxFit.fill,
                                       ),
                                     )),
@@ -176,7 +180,6 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
                     return const ErrorConnection();
                   }
               }
-
               return Container();
             }),
       ),

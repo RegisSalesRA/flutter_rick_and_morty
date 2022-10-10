@@ -4,8 +4,7 @@ import 'package:http/http.dart' as http;
 import '../../../../model/model.dart';
 
 class RepositoryLocationImp {
-  List<Result> residentsByLocation = [];
-  late Future<LocationPlace> futureLocation;
+  List<Result> residentsByLocation = []; 
 
   Future<LocationPlace> fetchEarchLocation() async {
     final response =
