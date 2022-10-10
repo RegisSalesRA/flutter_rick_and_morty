@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import '../../../../config/config.dart';
 import '../../../../model/model.dart';
 import '../../../components/components.dart';
+import '../repository/location_repository.dart';
 import 'list_residents_widget.dart';
 import 'widgets.dart';
 
@@ -18,24 +19,17 @@ class EarthLocationScreen extends StatefulWidget {
 }
 
 class _EarthLocationScreenState extends State<EarthLocationScreen> {
-  List<String> residentsByLocationUrl = [];
-  List<Result> residentsByLocation = [];
-  late Future<LocationPlace> futureLocation;
+  late RepositoryLocationImp repositoryLocationImp = RepositoryLocationImp();
+  //Location
+  late Future<LocationPlace> futureLocation =
+      repositoryLocationImp.futureLocation;
+  late Future<LocationPlace> futureLocationFetch =
+      repositoryLocationImp.fetchEarchLocation();
+  //Residents
+  late List<Result> residentsByLocation =
+      repositoryLocationImp.residentsByLocation;
 
-  Future<LocationPlace> fetchEarchLocation() async {
-    final response =
-        await http.get(Uri.parse('https://rickandmortyapi.com/api/location/1'));
-
-    if (response.statusCode == 200) {
-      var locationFetch = LocationPlace.fromJson(jsonDecode(response.body));
-
-      return locationFetch;
-    } else {
-      throw Exception('Failed to load location');
-    }
-  }
-
-  Future<void> fetchEarchLocationResidents() async {
+  Future<List<Result>> fetchEarchLocationResidents(lista) async {
     final response =
         await http.get(Uri.parse('https://rickandmortyapi.com/api/location/1'));
     var locationFetch = LocationPlace.fromJson(jsonDecode(response.body));
@@ -44,18 +38,18 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
       final response = await http.get(Uri.parse(item));
       var value = Result.fromJson(jsonDecode(response.body));
 
-      if (!mounted) return;
       setState(() {
-        residentsByLocation.add(value);
+        lista.add(value);
       });
     }
+    return lista;
   }
 
   @override
   void initState() {
     super.initState();
-    fetchEarchLocationResidents();
-    futureLocation = fetchEarchLocation();
+    fetchEarchLocationResidents(residentsByLocation);
+    futureLocation = futureLocationFetch;
   }
 
   @override

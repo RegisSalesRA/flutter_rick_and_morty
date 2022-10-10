@@ -18,7 +18,6 @@ class CidatelLocationScreen extends StatefulWidget {
 }
 
 class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
-  List<String> residentsByLocationUrl = [];
   List<Result> residentsByLocation = [];
   late Future<LocationPlace> futureLocation;
 

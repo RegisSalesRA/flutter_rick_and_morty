@@ -17,12 +17,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   RepositoryHomeImp repositoryHomeImp = RepositoryHomeImp();
+    late Future<List<Result>> fetchCharacters =
+      repositoryHomeImp.fetchCharacters();
   late Future<List<Result>> futureCharacterList =
       repositoryHomeImp.futureCharacterList;
   late List<Result> futureCharacterFilter =
       repositoryHomeImp.futureCharacterFilter;
-  late Future<List<Result>> fetchCharacters =
-      repositoryHomeImp.fetchCharacters();
+
 
   late String searchString = repositoryHomeImp.searchString;
   late bool isLoading = repositoryHomeImp.isLoading;

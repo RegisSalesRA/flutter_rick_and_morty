@@ -40,7 +40,6 @@ class RepositoryHomeImp extends ChangeNotifier {
           in jsonResponseList.map((data) => Result.fromJson(data)).toList()) {
         lista.add(item);
       }
-      // print(futureCharacterFilter);
       return lista;
     } else {
       throw Exception('Failed to load character');
