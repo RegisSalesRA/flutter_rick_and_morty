@@ -19,10 +19,11 @@ class EarthLocationScreen extends StatefulWidget {
 
 class _EarthLocationScreenState extends State<EarthLocationScreen> {
   late RepositoryLocationImp repositoryLocationImp = RepositoryLocationImp();
+  late List<Result> residentsByLocation =
+      repositoryLocationImp.residentsByLocation;
   late Future<LocationPlace> futureLocation;
-  List<Result> residentsByLocation = [];
 
-  Future<void> fetchEarchLocationResidents() async {
+  fetchEarchLocationResidents() async {
     final response =
         await http.get(Uri.parse('https://rickandmortyapi.com/api/location/1'));
     var locationFetch = LocationPlace.fromJson(jsonDecode(response.body));
@@ -42,7 +43,7 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
   void initState() {
     super.initState();
     fetchEarchLocationResidents();
-    futureLocation = repositoryLocationImp.fetchEarchLocation();
+    futureLocation = repositoryLocationImp.fetchEarchLocation(1);
   }
 
   @override

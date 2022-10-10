@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import '../../../../config/config.dart';
 import '../../../../model/model.dart';
 import '../../../components/components.dart';
+import '../repository/location_repository.dart';
 import '../widgets/widgets.dart';
 
 class CidatelLocationScreen extends StatefulWidget {
@@ -17,24 +18,11 @@ class CidatelLocationScreen extends StatefulWidget {
 }
 
 class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
-  List<String> residentsByLocationUrl = [];
+  late RepositoryLocationImp repositoryLocationImp = RepositoryLocationImp();
   List<Result> residentsByLocation = [];
   late Future<LocationPlace> futureLocation;
 
-  Future<LocationPlace> fetchEarchLocation() async {
-    final response =
-        await http.get(Uri.parse('https://rickandmortyapi.com/api/location/3'));
-
-    if (response.statusCode == 200) {
-      var locationFetch = LocationPlace.fromJson(jsonDecode(response.body));
-
-      return locationFetch;
-    } else {
-      throw Exception('Failed to load location');
-    }
-  }
-
-  Future<void> fetchEarchLocationResidents() async {
+  fetchEarchLocationResidents() async {
     final response =
         await http.get(Uri.parse('https://rickandmortyapi.com/api/location/3'));
     var locationFetch = LocationPlace.fromJson(jsonDecode(response.body));
@@ -54,7 +42,7 @@ class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
   void initState() {
     super.initState();
     fetchEarchLocationResidents();
-    futureLocation = fetchEarchLocation();
+    futureLocation = repositoryLocationImp.fetchEarchLocation(3);
   }
 
   @override

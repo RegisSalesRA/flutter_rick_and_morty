@@ -4,11 +4,11 @@ import 'package:http/http.dart' as http;
 import '../../../../model/model.dart';
 
 class RepositoryLocationImp {
-  List<Result> residentsByLocation = []; 
+  List<Result> residentsByLocation = [];
 
-  Future<LocationPlace> fetchEarchLocation() async {
+  Future<LocationPlace> fetchEarchLocation(int value) async {
     final response =
-        await http.get(Uri.parse('https://rickandmortyapi.com/api/location/1'));
+        await http.get(Uri.parse('https://rickandmortyapi.com/api/location/${value.toString()}'));
 
     if (response.statusCode == 200) {
       var locationFetch = LocationPlace.fromJson(jsonDecode(response.body));
@@ -32,4 +32,4 @@ class RepositoryLocationImp {
     }
     return lista;
   }
-}
+} 
