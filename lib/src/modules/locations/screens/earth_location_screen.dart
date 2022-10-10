@@ -3,7 +3,11 @@ import '../../../../config/config.dart';
 import '../../../../model/model.dart';
 import '../../../components/components.dart';
 import '../repository/location_repository.dart';
-import '../widgets/widgets.dart'; 
+import '../widgets/widgets.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 class EarthLocationScreen extends StatefulWidget {
   const EarthLocationScreen({
     Key? key,
@@ -15,17 +19,30 @@ class EarthLocationScreen extends StatefulWidget {
 
 class _EarthLocationScreenState extends State<EarthLocationScreen> {
   late RepositoryLocationImp repositoryLocationImp = RepositoryLocationImp();
-  late List<Result> residentsByLocation =
-      repositoryLocationImp.residentsByLocation;
+  late Future<LocationPlace> futureLocation;
+  List<Result> residentsByLocation = [];
+
+  Future<void> fetchEarchLocationResidents() async {
+    final response =
+        await http.get(Uri.parse('https://rickandmortyapi.com/api/location/1'));
+    var locationFetch = LocationPlace.fromJson(jsonDecode(response.body));
+
+    for (var item in locationFetch.residents) {
+      final response = await http.get(Uri.parse(item));
+      var value = Result.fromJson(jsonDecode(response.body));
+
+      if (!mounted) return;
+      setState(() {
+        residentsByLocation.add(value);
+      });
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    repositoryLocationImp
-        .fetchEarchLocationResidents(residentsByLocation)
-        .then((value) {
-      setState(() {});
-    });
+    fetchEarchLocationResidents();
+    futureLocation = repositoryLocationImp.fetchEarchLocation();
   }
 
   @override
@@ -34,7 +51,7 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
     return Material(
       child: Scaffold(
         body: FutureBuilder<LocationPlace>(
-            future: repositoryLocationImp.fetchEarchLocation(),
+            future: futureLocation,
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
@@ -52,6 +69,7 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
                         SingleChildScrollView(
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 SizedBox(
                                     height: size.height * 0.40,
@@ -113,7 +131,7 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
                                   ),
                                 ),
                                 const SizedBox(
-                                  height: 10,
+                                  height: 25,
                                 ),
                                 const Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 20),

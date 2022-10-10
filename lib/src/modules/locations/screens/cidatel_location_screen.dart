@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:rick_and_morty/src/modules/locations/widgets/list_residents_widget.dart';
 import '../../../../config/config.dart';
 import '../../../../model/model.dart';
 import '../../../components/components.dart';
-import '../widgets/widgets.dart'; 
+import '../widgets/widgets.dart';
 
 class CidatelLocationScreen extends StatefulWidget {
   const CidatelLocationScreen({
@@ -18,6 +17,7 @@ class CidatelLocationScreen extends StatefulWidget {
 }
 
 class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
+  List<String> residentsByLocationUrl = [];
   List<Result> residentsByLocation = [];
   late Future<LocationPlace> futureLocation;
 
@@ -53,12 +53,13 @@ class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
   @override
   void initState() {
     super.initState();
-    fetchEarchLocationResidents;
+    fetchEarchLocationResidents();
     futureLocation = fetchEarchLocation();
   }
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Material(
       child: Scaffold(
         body: FutureBuilder<LocationPlace>(
@@ -80,15 +81,16 @@ class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
                         SingleChildScrollView(
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 SizedBox(
-                                    height: 300,
+                                    height: size.height * 0.40,
                                     child: ClipRRect(
                                       borderRadius: const BorderRadius.only(
                                           bottomLeft: Radius.circular(50)),
                                       child: Image.asset(
                                         'assets/images/cidatel.png',
-                                        fit: BoxFit.fill,
+                                        fit: BoxFit.cover,
                                       ),
                                     )),
                                 const SizedBox(
@@ -141,7 +143,7 @@ class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
                                   ),
                                 ),
                                 const SizedBox(
-                                  height: 10,
+                                  height: 25,
                                 ),
                                 const Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 20),
