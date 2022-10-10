@@ -1,8 +1,7 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:rick_and_morty/src/modules/home/repository/home_repository.dart';
 
 import '../../../config/config.dart';
 import '../../../model/model.dart';
@@ -17,60 +16,27 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late Future<List<Result>> futureCharacterList;
+  RepositoryHomeImp repositoryHomeImp = RepositoryHomeImp();
+  late Future<List<Result>> futureCharacterList =
+      repositoryHomeImp.futureCharacterList;
+  late List<Result> futureCharacterFilter =
+      repositoryHomeImp.futureCharacterFilter;
+  late Future<List<Result>> fetchCharacters =
+      repositoryHomeImp.fetchCharacters();
+
+  late String searchString = repositoryHomeImp.searchString;
+  late bool isLoading = repositoryHomeImp.isLoading;
+
   final searchController = TextEditingController();
-  List<Result> futureCharacterFilter = [];
-  String searchString = "";
-  bool isLoading = false;
 
-  Future<List<Result>> fetchCharacters() async {
-    final response =
-        await http.get(Uri.parse('https://rickandmortyapi.com/api/character'));
-
-    if (response.statusCode == 200) {
-      var jsonResponse = json.decode(response.body);
-      var jsonResponseList = jsonResponse["results"] as List;
-
-      return jsonResponseList.map((data) => Result.fromJson(data)).toList();
-    } else {
-      throw Exception('Failed to load character');
-    }
-  }
-
-  Future<List<Result>> fetchFilterCharacters(nameValue) async {
-    if (searchString.isEmpty || searchString == "") {}
-
-    setState(() {
-      futureCharacterFilter = [];
-    });
-
-    final response = await http.get(Uri.parse(
-        "https://rickandmortyapi.com/api/character/?name=$nameValue"));
-    if (response.statusCode == 200) {
-      var jsonResponse = json.decode(response.body);
-      var jsonResponseList = jsonResponse["results"] as List;
-
-      for (Result item
-          in jsonResponseList.map((data) => Result.fromJson(data)).toList()) {
-        setState(() {
-          futureCharacterFilter.add(item);
-        });
-      }
-
-      return futureCharacterFilter;
-    } else {
-      throw Exception('Failed to load character');
-    }
+  void limparControlers() {
+    searchController.clear();
   }
 
   void refreshPage() {
     setState(() {
       futureCharacterFilter.clear();
     });
-  }
-
-  void limparControlers() {
-    searchController.clear();
   }
 
   void loadingPage() async {
@@ -86,8 +52,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    futureCharacterList = fetchCharacters();
-    refreshPage();
+    futureCharacterList = fetchCharacters;
   }
 
   @override
@@ -128,7 +93,8 @@ class _HomeState extends State<Home> {
                               },
                               onSubmitted: (valorInputSearch) async {
                                 loadingPage();
-                                await fetchFilterCharacters(valorInputSearch);
+                                await repositoryHomeImp.fetchFilterCharacters(
+                                    valorInputSearch, futureCharacterFilter);
                                 limparControlers();
                                 setState(() {
                                   searchString = '';
@@ -137,7 +103,9 @@ class _HomeState extends State<Home> {
                               },
                               onTapFilter: () async {
                                 loadingPage();
-                                await fetchFilterCharacters(searchString);
+
+                                await repositoryHomeImp.fetchFilterCharacters(
+                                    searchString, futureCharacterFilter);
                                 limparControlers();
                                 setState(() {
                                   searchString = '';
