@@ -79,7 +79,7 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
                                           bottomLeft: Radius.circular(50)),
                                       child: Image.asset(
                                         'assets/images/earth.png',
-                                        fit: BoxFit.fill,
+                                        fit: BoxFit.cover,
                                       ),
                                     )),
                                 const SizedBox(
