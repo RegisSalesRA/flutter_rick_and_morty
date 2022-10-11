@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../../../../model/model.dart';
-import 'widgets.dart';
+import '../../../components/components.dart'; 
 
 class ListViewCard extends StatelessWidget {
+  final bool changeColor;
   const ListViewCard({
     Key? key,
     required this.data,
+    required this.changeColor,
     required this.searchString,
   }) : super(key: key);
 
@@ -26,6 +28,7 @@ class ListViewCard extends StatelessWidget {
                     FocusScope.of(context).unfocus(),
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => DetailWidget(
+                          changeColor :changeColor,
                               image: data![index].image,
                               tag: data![index].id.toString(),
                               name: data![index].name,

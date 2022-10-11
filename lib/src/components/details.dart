@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../../config/config.dart';
-import '../../../../model/characters.dart';
-import '../../../../model/episode.dart';
+import '../../config/config.dart';
+import '../../model/characters.dart';
+import '../../model/episode.dart';
 
 class DetailWidget extends StatefulWidget {
   final String tag;
@@ -15,6 +15,7 @@ class DetailWidget extends StatefulWidget {
   final Gender gender;
   final String species;
   final Status status;
+  final bool changeColor;
   final List<String> episode;
 
   const DetailWidget(
@@ -27,6 +28,7 @@ class DetailWidget extends StatefulWidget {
       required this.gender,
       required this.species,
       required this.status,
+      required this.changeColor,
       required this.episode})
       : super(key: key);
 
@@ -63,6 +65,9 @@ class _DetailWidgetState extends State<DetailWidget> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: widget.changeColor
+          ? AppThemeDark.backgroundColor
+          : AppThemeLight.backgroundColor,
       body: SafeArea(
           child: Stack(
         children: [
@@ -93,8 +98,10 @@ class _DetailWidgetState extends State<DetailWidget> {
                               Container(
                                 height: 10,
                                 width: 10,
-                                decoration: const BoxDecoration(
-                                    color: AppThemeLight.alive,
+                                decoration: BoxDecoration(
+                                    color: widget.changeColor
+                                        ? AppThemeDark.alive
+                                        : AppThemeLight.alive,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(100))),
                               ),
@@ -102,8 +109,10 @@ class _DetailWidgetState extends State<DetailWidget> {
                               Container(
                                 height: 10,
                                 width: 10,
-                                decoration: const BoxDecoration(
-                                    color: AppThemeLight.dead,
+                                decoration: BoxDecoration(
+                                    color: widget.changeColor
+                                        ? AppThemeDark.dead
+                                        : AppThemeLight.dead,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(100))),
                               ),
@@ -111,8 +120,10 @@ class _DetailWidgetState extends State<DetailWidget> {
                               Container(
                                 height: 10,
                                 width: 10,
-                                decoration: const BoxDecoration(
-                                    color: AppThemeLight.unknow,
+                                decoration: BoxDecoration(
+                                    color: widget.changeColor
+                                        ? AppThemeDark.unknow
+                                        : AppThemeLight.unknow,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(100))),
                               ),
@@ -121,8 +132,10 @@ class _DetailWidgetState extends State<DetailWidget> {
                                   const EdgeInsets.symmetric(horizontal: 10),
                               child: Text(
                                 widget.name,
-                                style: const TextStyle(
-                                    color: AppThemeLight.primaryColor,
+                                style: TextStyle(
+                                    color: widget.changeColor
+                                        ? AppThemeDark.primaryColor
+                                        : AppThemeLight.primaryColor,
                                     fontSize: AppTextStyle.titulo,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -150,35 +163,43 @@ class _DetailWidgetState extends State<DetailWidget> {
                         children: [
                           Row(
                             children: [
-                              const Text(
+                              Text(
                                 "Status: ",
                                 style: TextStyle(
                                     overflow: TextOverflow.ellipsis,
-                                    color: AppThemeLight.titleDetail,
+                                    color: widget.changeColor
+                                        ? AppThemeDark.titleDetail
+                                        : AppThemeLight.titleDetail,
                                     fontSize: AppTextStyle.titulo,
                                     fontWeight: FontWeight.bold),
                               ),
                               if (widget.status == Status.ALIVE)
-                                const Text(
+                                Text(
                                   "( ALIVE )",
                                   style: TextStyle(
-                                      color: AppThemeLight.alive,
+                                      color: widget.changeColor
+                                          ? AppThemeDark.alive
+                                          : AppThemeLight.alive,
                                       fontSize: AppTextStyle.titulo,
                                       fontWeight: FontWeight.bold),
                                 ),
                               if (widget.status == Status.DEAD)
-                                const Text(
+                                Text(
                                   "( DEAD )",
                                   style: TextStyle(
-                                      color: AppThemeLight.dead,
+                                      color: widget.changeColor
+                                          ? AppThemeDark.dead
+                                          : AppThemeLight.dead,
                                       fontSize: AppTextStyle.titulo,
                                       fontWeight: FontWeight.bold),
                                 ),
                               if (widget.status == Status.UNKNOWN)
-                                const Text(
+                                Text(
                                   "( UNKNOW )",
                                   style: TextStyle(
-                                      color: AppThemeLight.unknow,
+                                      color: widget.changeColor
+                                          ? AppThemeDark.unknow
+                                          : AppThemeLight.unknow,
                                       fontSize: AppTextStyle.titulo,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -186,11 +207,13 @@ class _DetailWidgetState extends State<DetailWidget> {
                           ),
                           Row(
                             children: [
-                              const Text(
+                              Text(
                                 "Origin: ",
                                 style: TextStyle(
                                     overflow: TextOverflow.ellipsis,
-                                    color: AppThemeLight.titleDetail,
+                                    color: widget.changeColor
+                                        ? AppThemeDark.titleDetail
+                                        : AppThemeLight.titleDetail,
                                     fontSize: AppTextStyle.titulo,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -200,10 +223,11 @@ class _DetailWidgetState extends State<DetailWidget> {
                                   child: Text(
                                     widget.origin,
                                     maxLines: 1,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                         overflow: TextOverflow.ellipsis,
-                                        color:
-                                            AppThemeLight.subTitleDescription,
+                                        color: widget.changeColor
+                                            ? AppThemeDark.subTitleDescription
+                                            : AppThemeLight.subTitleDescription,
                                         fontSize: AppTextStyle.titulo),
                                   ),
                                 ),
@@ -212,11 +236,13 @@ class _DetailWidgetState extends State<DetailWidget> {
                           ),
                           Row(
                             children: [
-                              const Text(
+                              Text(
                                 "Location: ",
                                 style: TextStyle(
                                     overflow: TextOverflow.ellipsis,
-                                    color: AppThemeLight.titleDetail,
+                                    color: widget.changeColor
+                                        ? AppThemeDark.titleDetail
+                                        : AppThemeLight.titleDetail,
                                     fontSize: AppTextStyle.titulo,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -226,10 +252,11 @@ class _DetailWidgetState extends State<DetailWidget> {
                                   child: Text(
                                     widget.location,
                                     maxLines: 1,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                         overflow: TextOverflow.ellipsis,
-                                        color:
-                                            AppThemeLight.subTitleDescription,
+                                        color: widget.changeColor
+                                            ? AppThemeDark.subTitleDescription
+                                            : AppThemeLight.subTitleDescription,
                                         fontSize: AppTextStyle.titulo),
                                   ),
                                 ),
@@ -238,33 +265,39 @@ class _DetailWidgetState extends State<DetailWidget> {
                           ),
                           Row(
                             children: [
-                              const Text(
+                              Text(
                                 "Gender: ",
                                 style: TextStyle(
                                     overflow: TextOverflow.ellipsis,
-                                    color: AppThemeLight.titleDetail,
+                                    color: widget.changeColor
+                                        ? AppThemeDark.titleDetail
+                                        : AppThemeLight.titleDetail,
                                     fontSize: AppTextStyle.titulo,
                                     fontWeight: FontWeight.bold),
                               ),
                               if (widget.gender == Gender.MALE)
-                                const AnimatedFadedText(
+                                AnimatedFadedText(
                                   direction: 1,
                                   child: Text(
                                     'Male',
                                     style: TextStyle(
                                       overflow: TextOverflow.ellipsis,
-                                      color: AppThemeLight.subTitleDescription,
+                                      color: widget.changeColor
+                                          ? AppThemeDark.titleDetail
+                                          : AppThemeLight.titleDetail,
                                     ),
                                   ),
                                 ),
                               if (widget.gender == Gender.FEMALE)
-                                const AnimatedFadedText(
+                                AnimatedFadedText(
                                   direction: 1,
                                   child: Text(
                                     'Female',
                                     style: TextStyle(
                                       overflow: TextOverflow.ellipsis,
-                                      color: AppThemeLight.subTitleDescription,
+                                      color: widget.changeColor
+                                          ? AppThemeDark.subTitleDescription
+                                          : AppThemeLight.subTitleDescription,
                                     ),
                                   ),
                                 ),
@@ -272,10 +305,12 @@ class _DetailWidgetState extends State<DetailWidget> {
                           ),
                           Row(
                             children: [
-                              const Text(
+                              Text(
                                 "Species: ",
                                 style: TextStyle(
-                                    color: AppThemeLight.titleDetail,
+                                    color: widget.changeColor
+                                        ? AppThemeDark.titleDetail
+                                        : AppThemeLight.titleDetail,
                                     overflow: TextOverflow.ellipsis,
                                     fontSize: AppTextStyle.titulo,
                                     fontWeight: FontWeight.bold),
@@ -284,8 +319,10 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 direction: 1,
                                 child: Text(
                                   widget.species,
-                                  style: const TextStyle(
-                                    color: AppThemeLight.subTitleDescription,
+                                  style: TextStyle(
+                                    color: widget.changeColor
+                                        ? AppThemeDark.subTitleDescription
+                                        : AppThemeLight.subTitleDescription,
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
@@ -294,10 +331,12 @@ class _DetailWidgetState extends State<DetailWidget> {
                           ),
                           Row(
                             children: [
-                              const Text(
+                              Text(
                                 "Nº Episodes: ",
                                 style: TextStyle(
-                                    color: AppThemeLight.titleDetail,
+                                    color: widget.changeColor
+                                        ? AppThemeDark.titleDetail
+                                        : AppThemeLight.titleDetail,
                                     overflow: TextOverflow.ellipsis,
                                     fontSize: AppTextStyle.titulo,
                                     fontWeight: FontWeight.bold),
@@ -306,8 +345,10 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 direction: 1,
                                 child: Text(
                                   "${widget.episode.length}",
-                                  style: const TextStyle(
-                                    color: AppThemeLight.subTitleDescription,
+                                  style: TextStyle(
+                                    color: widget.changeColor
+                                        ? AppThemeDark.subTitleDescription
+                                        : AppThemeLight.subTitleDescription,
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
@@ -318,14 +359,26 @@ class _DetailWidgetState extends State<DetailWidget> {
                             height: 10,
                           ),
                           ExpansionTile(
-                            textColor: AppThemeLight.primaryColor,
-                            iconColor: AppThemeLight.primaryColor,
+                            collapsedTextColor: widget.changeColor
+                                ? AppThemeDark.primaryColor
+                                : AppThemeLight.primaryColor,
+                            collapsedIconColor: widget.changeColor
+                                ? AppThemeDark.primaryColor
+                                : AppThemeLight.primaryColor,
+                            textColor: widget.changeColor
+                                ? AppThemeDark.primaryColor
+                                : AppThemeLight.primaryColor,
+                            iconColor: widget.changeColor
+                                ? AppThemeDark.primaryColor
+                                : AppThemeLight.primaryColor,
                             tilePadding: const EdgeInsets.only(right: 20),
-                            title: const Text(
+                            title: Text(
                               "Episodes",
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
+                                  fontWeight: FontWeight.bold,
+                                  color: widget.changeColor
+                                      ? AppThemeLight.backgroundColor
+                                      : AppThemeLight.primaryColor),
                             ),
                             children: [
                               episodesByCharactersList.isEmpty
@@ -342,26 +395,35 @@ class _DetailWidgetState extends State<DetailWidget> {
                                             Text(
                                               episodesByCharactersList[index]
                                                   .name,
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  color: AppThemeLight
-                                                      .primaryColor),
+                                                  color: widget.changeColor
+                                                      ? AppThemeDark
+                                                          .primaryColor
+                                                      : AppThemeLight
+                                                          .primaryColor),
                                             ),
                                             Text(
                                               episodesByCharactersList[index]
                                                   .airDate,
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  color: AppThemeLight
-                                                      .primaryColor),
+                                                  color: widget.changeColor
+                                                      ? AppThemeDark
+                                                          .primaryColor
+                                                      : AppThemeLight
+                                                          .primaryColor),
                                             ),
                                             Text(
                                               episodesByCharactersList[index]
                                                   .episode,
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  color: AppThemeLight
-                                                      .primaryColor),
+                                                  color: widget.changeColor
+                                                      ? AppThemeDark
+                                                          .primaryColor
+                                                      : AppThemeLight
+                                                          .primaryColor),
                                             ),
                                             Divider(
                                               thickness: 2,
@@ -388,10 +450,12 @@ class _DetailWidgetState extends State<DetailWidget> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.arrow_back_rounded,
                   size: 30.0,
-                  color: AppThemeLight.primaryColor,
+                  color: widget.changeColor
+                      ? AppThemeDark.primaryColor
+                      : AppThemeLight.primaryColor,
                 )),
           )
         ],

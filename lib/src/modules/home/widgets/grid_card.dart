@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../config/config.dart';
-import 'widgets.dart';
+import '../../../components/components.dart';
 
 class GridCard extends StatelessWidget {
   final List<dynamic> listItens;
@@ -31,6 +31,7 @@ class GridCard extends StatelessWidget {
               FocusScope.of(context).unfocus(),
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => DetailWidget(
+                        changeColor: changeColor,
                         image: listItens[index].image,
                         tag: listItens[index].id.toString(),
                         name: listItens[index].name,
@@ -60,11 +61,11 @@ class GridCard extends StatelessWidget {
                 Center(
                   child: Text(
                     listItens[index].name,
-                    style:  TextStyle(
+                    style: TextStyle(
                         overflow: TextOverflow.ellipsis,
                         color: changeColor
-                    ? AppThemeDark.primaryColor
-                    : AppThemeLight.primaryColor,
+                            ? AppThemeDark.primaryColor
+                            : AppThemeLight.primaryColor,
                         fontSize: AppTextStyle.title,
                         fontWeight: FontWeight.bold),
                   ),

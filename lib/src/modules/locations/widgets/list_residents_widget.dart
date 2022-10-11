@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../model/model.dart';
-import '../../home/widgets/widgets.dart';
+import '../../../components/components.dart';
 
 class ListResidentsWidget extends StatelessWidget {
   final List<Result> lista;
@@ -44,6 +44,7 @@ class ListResidentsWidget extends StatelessWidget {
                             gender: lista[index].gender!,
                             species: lista[index].species!,
                             status: lista[index].status!,
+                            changeColor:false,
                             episode: lista[index].episode)));
                   },
                   child: ClipRRect(

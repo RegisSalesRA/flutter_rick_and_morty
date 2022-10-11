@@ -127,7 +127,9 @@ class _HomeState extends State<Home> {
                           if (futureCharacterFilter.isEmpty) ...[
                             if (searchString.isNotEmpty)
                               ListViewCard(
-                                  data: data, searchString: searchString),
+                                  changeColor: widget.changeColor,
+                                  data: data,
+                                  searchString: searchString),
                             if (searchString.isEmpty || searchString == '')
                               GridCard(
                                 changeColor: widget.changeColor,
@@ -136,6 +138,7 @@ class _HomeState extends State<Home> {
                           ] else if (futureCharacterFilter.isNotEmpty) ...[
                             if (searchString.isNotEmpty)
                               ListViewCard(
+                                  changeColor: widget.changeColor,
                                   data: futureCharacterFilter,
                                   searchString: searchString),
                             if (searchString.isEmpty || searchString == '')
