@@ -5,10 +5,11 @@ import 'widgets.dart';
 
 class GridCard extends StatelessWidget {
   final List<dynamic> listItens;
-
+  final bool changeColor;
   const GridCard({
     Key? key,
     required this.listItens,
+    required this.changeColor,
   }) : super(key: key);
 
   @override
@@ -59,9 +60,11 @@ class GridCard extends StatelessWidget {
                 Center(
                   child: Text(
                     listItens[index].name,
-                    style: const TextStyle(
+                    style:  TextStyle(
                         overflow: TextOverflow.ellipsis,
-                        color: AppThemeLight.primaryColor,
+                        color: changeColor
+                    ? AppThemeDark.primaryColor
+                    : AppThemeLight.primaryColor,
                         fontSize: AppTextStyle.title,
                         fontWeight: FontWeight.bold),
                   ),

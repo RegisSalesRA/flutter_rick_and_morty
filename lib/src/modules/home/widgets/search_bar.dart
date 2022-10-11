@@ -7,6 +7,7 @@ class SearchBar extends StatelessWidget {
   final VoidCallback? onTap;
   final VoidCallback? onTapFilter;
   final TextEditingController? controller;
+  final bool  changeColor;
 
   const SearchBar(
       {Key? key,
@@ -14,6 +15,7 @@ class SearchBar extends StatelessWidget {
       required this.onTapFilter,
       required this.onTap,
       required this.onFilter,
+      required this.changeColor,
       required this.controller})
       : super(key: key);
 
@@ -40,10 +42,12 @@ class SearchBar extends StatelessWidget {
             },
             icon: InkWell(
               onTap: onTapFilter,
-              child: const Icon(
+              child: Icon(
                 Icons.search,
                 size: 25,
-                color: AppThemeLight.primaryColor,
+                color: changeColor
+                    ? AppThemeDark.primaryColor
+                    : AppThemeLight.primaryColor,
               ),
             ),
           ),
@@ -53,10 +57,12 @@ class SearchBar extends StatelessWidget {
             },
             icon: InkWell(
               onTap: onTap,
-              child: const Icon(
+              child: Icon(
                 Icons.refresh,
                 size: 25,
-                color: AppThemeLight.primaryColor,
+                color: changeColor 
+                    ? AppThemeDark.primaryColor
+                    : AppThemeLight.primaryColor,
               ),
             ),
           ),

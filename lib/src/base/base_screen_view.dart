@@ -13,14 +13,30 @@ class BaseScreenView extends StatefulWidget {
 class _BaseScreenViewState extends State<BaseScreenView> {
   int currentIndex = 0;
   final pageController = PageController();
+  bool changeColor = false;
+  themeDarkLight() {
+    setState(() {
+      changeColor = !changeColor;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: changeColor
+          ? AppThemeDark.backgroundColor
+          : AppThemeLight.backgroundColor,
       body: PageView(
         controller: pageController,
         physics: const NeverScrollableScrollPhysics(),
-        children: const [Home(), LocationScreen(), SplashScreenQuiz()],
+        children: [
+          Home(
+            changeColor: changeColor,
+            themeColor: () => themeDarkLight(),
+          ),
+          LocationScreen(),
+          SplashScreenQuiz()
+        ],
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
@@ -31,7 +47,9 @@ class _BaseScreenViewState extends State<BaseScreenView> {
           ),
         ),
         child: BottomNavigationBar(
-          backgroundColor: AppThemeLight.primaryColor,
+          backgroundColor: changeColor
+              ? AppThemeDark.primaryColor
+              : AppThemeLight.primaryColor,
           elevation: 0,
           currentIndex: currentIndex,
           onTap: (index) {

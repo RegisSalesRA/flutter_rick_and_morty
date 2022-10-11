@@ -18,6 +18,7 @@ class ShimmerCharacters extends StatelessWidget {
                 onSubmitted: null,
                 onTapFilter: null,
                 onTap: null,
+                changeColor: false,
                 onFilter: null,
                 controller: null),
             const SizedBox(

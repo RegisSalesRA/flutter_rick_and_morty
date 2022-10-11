@@ -23,7 +23,9 @@ class _SplashScreenQuizState extends State<SplashScreenQuiz>
 
   Route _createRoute() {
     return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => const Home(),
+      pageBuilder: (context, animation, secondaryAnimation) => Home(changeColor: true,
+        themeColor: () {},
+      ),
       transitionsBuilder: (
         context,
         animation,

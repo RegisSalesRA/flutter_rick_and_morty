@@ -9,7 +9,10 @@ import '../../components/components.dart';
 import 'widgets/widgets.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  final VoidCallback themeColor;
+  final bool changeColor;
+  const Home({Key? key, required this.themeColor, required this.changeColor})
+      : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -17,14 +20,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   RepositoryHomeImp repositoryHomeImp = RepositoryHomeImp();
-    late Future<List<Result>> fetchCharacters =
+  late Future<List<Result>> fetchCharacters =
       repositoryHomeImp.fetchCharacters();
   late Future<List<Result>> futureCharacterList =
       repositoryHomeImp.futureCharacterList;
   late List<Result> futureCharacterFilter =
       repositoryHomeImp.futureCharacterFilter;
-
-
   late String searchString = repositoryHomeImp.searchString;
   late bool isLoading = repositoryHomeImp.isLoading;
 
@@ -86,6 +87,7 @@ class _HomeState extends State<Home> {
                             Column(mainAxisSize: MainAxisSize.min, children: [
                           const Header(),
                           SearchBar(
+                              changeColor: widget.changeColor,
                               controller: searchController,
                               onFilter: (value) {
                                 setState(() {
@@ -128,6 +130,7 @@ class _HomeState extends State<Home> {
                                   data: data, searchString: searchString),
                             if (searchString.isEmpty || searchString == '')
                               GridCard(
+                                changeColor: widget.changeColor,
                                 listItens: data!,
                               ),
                           ] else if (futureCharacterFilter.isNotEmpty) ...[
@@ -137,10 +140,41 @@ class _HomeState extends State<Home> {
                                   searchString: searchString),
                             if (searchString.isEmpty || searchString == '')
                               GridCard(
+                                changeColor: widget.changeColor,
                                 listItens: futureCharacterFilter,
                               ),
                           ],
                         ]),
+                      ),
+                      Positioned(
+                        top: 15,
+                        right: 15,
+                        child: GestureDetector(
+                          onTap: () {
+                            return widget.themeColor();
+                          },
+                          child: AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 300),
+                            child: widget.changeColor == true
+                                ? const Icon(
+                                    CupertinoIcons.brightness,
+                                    color: Colors.orangeAccent,
+                                    key: ValueKey('iconA'),
+                                  )
+                                : const Icon(
+                                    CupertinoIcons.moon_stars,
+                                    color: AppThemeDark.primaryColor,
+                                    key: ValueKey('iconB'),
+                                  ),
+                            transitionBuilder:
+                                (Widget child, Animation<double> animation) {
+                              return ScaleTransition(
+                                scale: animation,
+                                child: child,
+                              );
+                            },
+                          ),
+                        ),
                       ),
                       isLoading
                           ? Container(
