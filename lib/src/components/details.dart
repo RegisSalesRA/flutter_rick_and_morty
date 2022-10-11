@@ -103,7 +103,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                         ? AppThemeDark.alive
                                         : AppThemeLight.alive,
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(100))),
+                                     const   BorderRadius.all(Radius.circular(100))),
                               ),
                             if (widget.status == Status.DEAD)
                               Container(
@@ -114,7 +114,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                         ? AppThemeDark.dead
                                         : AppThemeLight.dead,
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(100))),
+                                    const    BorderRadius.all(Radius.circular(100))),
                               ),
                             if (widget.status == Status.UNKNOWN)
                               Container(
@@ -125,7 +125,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                         ? AppThemeDark.unknow
                                         : AppThemeLight.unknow,
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(100))),
+                                 const       BorderRadius.all(Radius.circular(100))),
                               ),
                             Padding(
                               padding:

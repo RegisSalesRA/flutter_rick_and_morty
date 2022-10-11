@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-
 import '../../components/components.dart';
 import 'screens/screens.dart';
 import 'widgets/widgets.dart';
 
 class LocationScreen extends StatelessWidget {
-  const LocationScreen({Key? key}) : super(key: key);
+  final bool changeColor;
+  const LocationScreen({Key? key, required this.changeColor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Material(
       child: Scaffold(
+        backgroundColor: changeColor ? Colors.black : Colors.white,
         body: SafeArea(
           child: Center(
               child: Padding(
@@ -18,22 +19,28 @@ class LocationScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const Header(changeColor: true),
+                  Header(changeColor: changeColor),
                   ChoiceLocation(
+                    changeColor: changeColor,
                     title: 'Earth',
                     label: 'Planet',
                     image: Image.asset(
                       'assets/images/earth.png',
                     ),
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const EarthLocationScreen())),
+                        builder: (context) => EarthLocationScreen(
+                              changeColor: changeColor,
+                            ))),
                   ),
                   ChoiceLocation(
+                    changeColor: changeColor,
                     title: 'Cidatel of Ricks',
                     label: 'Space Stadium',
                     image: Image.asset('assets/images/cidatel.png'),
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const CidatelLocationScreen())),
+                        builder: (context) => CidatelLocationScreen(
+                              changeColor: changeColor,
+                            ))),
                   ),
                 ],
               ),

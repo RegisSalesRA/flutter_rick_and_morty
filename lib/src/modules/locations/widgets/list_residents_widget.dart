@@ -4,9 +4,11 @@ import '../../../../model/model.dart';
 import '../../../components/components.dart';
 
 class ListResidentsWidget extends StatelessWidget {
+  final bool changeColor;
   final List<Result> lista;
   const ListResidentsWidget({
     Key? key,
+    required this.changeColor,
     required this.lista,
   }) : super(key: key);
 
@@ -44,7 +46,7 @@ class ListResidentsWidget extends StatelessWidget {
                             gender: lista[index].gender!,
                             species: lista[index].species!,
                             status: lista[index].status!,
-                            changeColor:false,
+                            changeColor: changeColor,
                             episode: lista[index].episode)));
                   },
                   child: ClipRRect(

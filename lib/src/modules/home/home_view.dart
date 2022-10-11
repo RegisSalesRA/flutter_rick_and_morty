@@ -75,7 +75,9 @@ class _HomeState extends State<Home> {
             case ConnectionState.active:
               break;
             case ConnectionState.waiting:
-              return const ShimmerCharacters();
+              return ShimmerCharacters(
+                changeColor: widget.changeColor,
+              );
             case ConnectionState.done:
               if (snapshot.hasData && !snapshot.hasError) {
                 List<Result>? data = snapshot.data;

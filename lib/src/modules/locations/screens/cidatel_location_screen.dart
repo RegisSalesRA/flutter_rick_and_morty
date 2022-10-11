@@ -9,9 +9,9 @@ import '../repository/location_repository.dart';
 import '../widgets/widgets.dart';
 
 class CidatelLocationScreen extends StatefulWidget {
-  const CidatelLocationScreen({
-    Key? key,
-  }) : super(key: key);
+  final bool changeColor;
+  const CidatelLocationScreen({Key? key, required this.changeColor})
+      : super(key: key);
 
   @override
   State<CidatelLocationScreen> createState() => _CidatelLocationScreenState();
@@ -50,6 +50,7 @@ class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
     final size = MediaQuery.of(context).size;
     return Material(
       child: Scaffold(
+        backgroundColor: widget.changeColor ? Colors.black : Colors.white,
         body: FutureBuilder<LocationPlace>(
             future: futureLocation,
             builder: (context, snapshot) {
@@ -89,8 +90,10 @@ class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
                                       horizontal: 20),
                                   child: Text(
                                     data!.name,
-                                    style: const TextStyle(
-                                        color: AppThemeLight.primaryColor,
+                                    style: TextStyle(
+                                        color: widget.changeColor
+                                            ? AppThemeDark.primaryColor
+                                            : AppThemeLight.primaryColor,
                                         fontSize: 30,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -133,12 +136,15 @@ class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
                                 const SizedBox(
                                   height: 25,
                                 ),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
                                   child: Text(
                                     "Residents: ",
                                     style: TextStyle(
-                                        color: AppThemeLight.titleDetail,
+                                        color: widget.changeColor
+                                            ? AppThemeDark.primaryColor
+                                            : AppThemeLight.primaryColor,
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -147,6 +153,7 @@ class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
                                   height: 10,
                                 ),
                                 ListResidentsWidget(
+                                  changeColor: widget.changeColor,
                                   lista: residentsByLocation,
                                 ),
                               ]),
@@ -158,9 +165,11 @@ class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
                               onTap: () {
                                 Navigator.of(context).pop();
                               },
-                              child: const Icon(
+                              child: Icon(
                                 Icons.arrow_back_ios,
-                                color: AppThemeLight.primaryColor,
+                                color: widget.changeColor
+                                    ? AppThemeDark.primaryColor
+                                    : AppThemeLight.primaryColor,
                                 size: 30.0,
                               ),
                             ))

@@ -7,8 +7,8 @@ class RepositoryLocationImp {
   List<Result> residentsByLocation = [];
 
   Future<LocationPlace> fetchEarchLocation(int value) async {
-    final response =
-        await http.get(Uri.parse('https://rickandmortyapi.com/api/location/${value.toString()}'));
+    final response = await http.get(Uri.parse(
+        'https://rickandmortyapi.com/api/location/${value.toString()}'));
 
     if (response.statusCode == 200) {
       var locationFetch = LocationPlace.fromJson(jsonDecode(response.body));
@@ -32,4 +32,4 @@ class RepositoryLocationImp {
     }
     return lista;
   }
-} 
+}

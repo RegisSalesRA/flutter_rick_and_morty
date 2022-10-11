@@ -4,7 +4,8 @@ import '../../../components/components.dart';
 import 'widgets.dart';
 
 class ShimmerCharacters extends StatelessWidget {
-  const ShimmerCharacters({Key? key}) : super(key: key);
+  final bool changeColor;
+  const ShimmerCharacters({Key? key,required this.changeColor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +14,12 @@ class ShimmerCharacters extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            const Header(changeColor: true),
-            const SearchBar(
+              Header(changeColor: changeColor),
+              SearchBar(
                 onSubmitted: null,
                 onTapFilter: null,
                 onTap: null,
-                changeColor: false,
+                changeColor: changeColor,
                 onFilter: null,
                 controller: null),
             const SizedBox(

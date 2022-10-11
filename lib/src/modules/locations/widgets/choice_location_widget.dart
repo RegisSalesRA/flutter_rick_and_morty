@@ -7,11 +7,13 @@ class ChoiceLocation extends StatelessWidget {
   final String label;
   final VoidCallback? onTap;
   final Image image;
+  final bool changeColor;
   const ChoiceLocation({
     Key? key,
     required this.title,
     required this.label,
     required this.image,
+    required this.changeColor,
     required this.onTap,
   }) : super(key: key);
 
@@ -37,15 +39,19 @@ class ChoiceLocation extends StatelessWidget {
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(
               title,
-              style: const TextStyle(
-                  color: AppThemeLight.primaryColor,
+              style: TextStyle(
+                  color: changeColor
+                      ? AppThemeDark.primaryColor
+                      : AppThemeLight.primaryColor,
                   fontSize: 18,
                   fontWeight: FontWeight.bold),
             ),
             Text(
               label,
-              style: const TextStyle(
-                color: AppThemeLight.primaryColor,
+              style: TextStyle(
+                color: changeColor
+                    ? AppThemeDark.primaryColor
+                    : AppThemeLight.primaryColor,
               ),
             ),
           ]),

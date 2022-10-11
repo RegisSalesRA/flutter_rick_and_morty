@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/config/theme_color.dart';
 
+import '../components/components.dart';
 import '../modules/modules.dart';
 
 class BaseScreenView extends StatefulWidget {
@@ -34,8 +35,10 @@ class _BaseScreenViewState extends State<BaseScreenView> {
             changeColor: changeColor,
             themeColor: () => themeDarkLight(),
           ),
-          LocationScreen(),
-          SplashScreenQuiz()
+          LocationScreen(
+            changeColor: changeColor,
+          ),
+          const ErrorConnection()
         ],
       ),
       bottomNavigationBar: Container(
