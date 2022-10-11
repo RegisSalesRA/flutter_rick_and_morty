@@ -85,6 +85,7 @@ class _HomeState extends State<Home> {
                   child: Stack(
                     children: [
                       SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
                         child:
                             Column(mainAxisSize: MainAxisSize.min, children: [
                           Header(

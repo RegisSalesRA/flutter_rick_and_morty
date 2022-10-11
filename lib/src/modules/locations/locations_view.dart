@@ -17,6 +17,7 @@ class LocationScreen extends StatelessWidget {
               child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
+              physics: const  BouncingScrollPhysics(),
               child: Column(
                 children: [
                   Header(changeColor: changeColor),

@@ -14,6 +14,7 @@ class ErrorConnection extends StatelessWidget {
         ),
       ),
       child: SingleChildScrollView(
+        physics: const  BouncingScrollPhysics(),
           child: Column(children: [
         Image.asset(
           'assets/images/error.png',

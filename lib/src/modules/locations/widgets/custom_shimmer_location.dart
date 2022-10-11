@@ -10,6 +10,7 @@ class CustomShimmerLocation extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           CustomShimmer(
             height: size.height * 0.40,
@@ -56,6 +57,7 @@ class CustomShimmerLocation extends StatelessWidget {
               height: 65,
               width: size.width,
               child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 itemCount: 10,

@@ -68,6 +68,7 @@ class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
                         child: Stack(
                       children: [
                         SingleChildScrollView(
+                          physics: const  BouncingScrollPhysics(),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

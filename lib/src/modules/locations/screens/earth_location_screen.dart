@@ -69,6 +69,7 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
                         child: Stack(
                       children: [
                         SingleChildScrollView(
+                          physics: const  BouncingScrollPhysics(),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

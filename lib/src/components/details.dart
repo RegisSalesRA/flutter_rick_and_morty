@@ -72,6 +72,7 @@ class _DetailWidgetState extends State<DetailWidget> {
           child: Stack(
         children: [
           SingleChildScrollView(
+          physics: const  BouncingScrollPhysics(),
             child: Column(
               children: [
                 SizedBox(

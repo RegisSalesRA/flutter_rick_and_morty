@@ -23,6 +23,7 @@ class ListResidentsWidget extends StatelessWidget {
           height: 65,
           width: size.width,
           child: ListView.builder(
+            physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
             itemCount: lista.length,

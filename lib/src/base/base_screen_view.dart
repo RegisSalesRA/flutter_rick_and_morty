@@ -38,7 +38,7 @@ class _BaseScreenViewState extends State<BaseScreenView> {
           LocationScreen(
             changeColor: changeColor,
           ),
-          const ErrorConnection()
+          const SplashScreenQuiz()
         ],
       ),
       bottomNavigationBar: Container(
