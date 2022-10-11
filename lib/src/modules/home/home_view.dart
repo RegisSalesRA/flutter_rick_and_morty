@@ -85,7 +85,9 @@ class _HomeState extends State<Home> {
                       SingleChildScrollView(
                         child:
                             Column(mainAxisSize: MainAxisSize.min, children: [
-                          const Header(),
+                          Header(
+                            changeColor: widget.changeColor,
+                          ),
                           SearchBar(
                               changeColor: widget.changeColor,
                               controller: searchController,
@@ -157,7 +159,7 @@ class _HomeState extends State<Home> {
                             return widget.themeColor();
                           },
                           child: AnimatedSwitcher(
-                            duration: const Duration(milliseconds: 300),
+                            duration: const Duration(milliseconds: 1000),
                             child: widget.changeColor == true
                                 ? const Icon(
                                     CupertinoIcons.brightness,
@@ -184,10 +186,12 @@ class _HomeState extends State<Home> {
                               color: Colors.black.withOpacity(0.5),
                               width: size.width,
                               height: size.height,
-                              child: const Center(
+                              child: Center(
                                   child: CupertinoActivityIndicator(
                                 radius: 25,
-                                color: AppThemeLight.primaryColor,
+                                color: widget.changeColor
+                                    ? AppThemeDark.primaryColor
+                                    : AppThemeLight.primaryColor,
                               )))
                           : Container()
                     ],

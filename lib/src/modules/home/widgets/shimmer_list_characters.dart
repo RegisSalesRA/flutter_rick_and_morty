@@ -13,7 +13,7 @@ class ShimmerCharacters extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            const Header(),
+            const Header(changeColor: true),
             const SearchBar(
                 onSubmitted: null,
                 onTapFilter: null,

@@ -12,7 +12,7 @@ class ErrorConnection extends StatelessWidget {
       const SizedBox(
         height: 25,
       ),
-      const Header(),
+        Header(changeColor: true,),
       Image.asset(
         'assets/images/error.png',
         height: 350,

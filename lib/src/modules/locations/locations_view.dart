@@ -18,7 +18,7 @@ class LocationScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const Header(),
+                  const Header(changeColor: true),
                   ChoiceLocation(
                     title: 'Earth',
                     label: 'Planet',
