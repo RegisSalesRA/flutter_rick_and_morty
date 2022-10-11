@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../model/model.dart';
+import '../../../../entity/entity.dart';
 import '../../../components/components.dart';
 
 class ListResidentsWidget extends StatelessWidget {

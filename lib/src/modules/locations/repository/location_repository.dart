@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../../../../model/model.dart';
+import '../../../../entity/entity.dart';
 
 class RepositoryLocationImp {
   List<Result> residentsByLocation = [];

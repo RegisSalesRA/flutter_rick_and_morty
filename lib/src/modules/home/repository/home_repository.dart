@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../../model/model.dart';
+import '../../../../entity/entity.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 

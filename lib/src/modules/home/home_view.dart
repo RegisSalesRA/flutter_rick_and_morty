@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:rick_and_morty/src/modules/home/repository/home_repository.dart';
 
 import '../../../config/config.dart';
-import '../../../model/model.dart';
+import '../../../entity/entity.dart';
 import '../../components/components.dart';
 import 'widgets/widgets.dart';
 

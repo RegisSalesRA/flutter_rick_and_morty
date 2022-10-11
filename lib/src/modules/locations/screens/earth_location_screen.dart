@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../config/config.dart';
-import '../../../../model/model.dart';
+import '../../../../entity/entity.dart';
 import '../../../components/components.dart';
 import '../repository/location_repository.dart';
 import '../widgets/widgets.dart';

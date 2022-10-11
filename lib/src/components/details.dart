@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../../config/config.dart';
-import '../../model/characters.dart';
-import '../../model/episode.dart';
+import '../../entity/characters.dart';
+import '../../entity/episode.dart';
 
 class DetailWidget extends StatefulWidget {
   final String tag;
