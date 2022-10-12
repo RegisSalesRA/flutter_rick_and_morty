@@ -44,17 +44,23 @@ class _ResultScreenState extends State<ResultScreen> {
                   Image.asset(
                     'assets/images/zerada.png',
                   ),
-                const Text(
-                  "You Score is",
-                  style: TextStyle(color: Colors.white, fontSize: 34.0),
-                ),
-                Text(
-                  "${widget.score}",
-                  style: const TextStyle(
-                    color: Colors.orange,
-                    fontSize: 85.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      "Score result: ",
+                      style: TextStyle(color: Colors.white, fontSize: 34.0),
+                    ),
+                    Text(
+                      "${widget.score}",
+                      style: const TextStyle(
+                        color: Colors.orange,
+                        fontSize: 85.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
                 TextButton(
                   onPressed: () {
@@ -62,7 +68,7 @@ class _ResultScreenState extends State<ResultScreen> {
                     Navigator.of(context).pop();
                   },
                   child: const Text(
-                    "Reapeat the quizz",
+                    "back to home",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),

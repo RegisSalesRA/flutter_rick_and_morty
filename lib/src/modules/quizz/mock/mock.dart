@@ -2,70 +2,68 @@ import '../../../../entity/entity.dart';
 
 List<QuestionModel> questions = [
   QuestionModel(
-    "How Many Whiskers does the average cat have on each side of its face ?",
+    "What is the number of Rick's universe ?",
     {
-      "1": false,
-      "3": false,
-      "12": true,
-      "5,007": false,
+      "C-150": false,
+      "C-120 ": false,
+      "C-137": true,
+      "C-147": false,
     },
   ),
-  QuestionModel("When does a cat purr ?", {
-    "When it cares for its kittens": false,
-    "When it needs confort": false,
-    "When it feels content": false,
-    "All of the above": true,
+  QuestionModel("What is Rick afraid of ?", {
+    "Psychologist": false,
+    "Doctor": false,
+    "Jerry Smith": false,
+    "Pirates": true,
   }),
-  QuestionModel("What is the averge nulber of kittens in a litter ?", {
-    "1 to 2": false,
-    "3 to 5": true,
-    "8 to 10": false,
-    "12 to 14": false,
-  }),
-  QuestionModel("How many moons does Mars have ?", {
-    "1": false,
-    "2": false,
-    "4": true,
-    "8": false,
-  }),
-  QuestionModel("What is Mars's nickname ?", {
-    "The red planet": true,
-    "The dusty planet": false,
-    "The hot planet": false,
-    "The smelly planet": false,
-  }),
-  QuestionModel("About How long would it take to travel to Mars ?", {
-    "Three days": false,
-    "A month": false,
-    "Eight months": true,
-    "Two years": false,
+  QuestionModel("what does Wubba Lubba dub-dub mean ?", {
+    "I am in great pain, please help me": true,
+    "I am really drunk?": false,
+    "You need get schwifty": false,
+    "Pants? Who need pants?": false,
   }),
   QuestionModel(
-      "Mars is Named after the Roman god Mars. What is he the god of ?", {
-    "Fire": false,
-    "Love": false,
-    "Agriculture": false,
-    "War": true,
-  }),
-  QuestionModel("Mars Is the ___ planet from the sun ?", {
-    "Secon": false,
-    "Third": false,
-    "Fourth": true,
-    "Sixth": false,
-  }),
-  QuestionModel(
-      "Where did Orville and Wilbur Wright build their first flying airplane ?",
+      "What is the name of the band that Rick, Squanchy, and Birdperson were in ?",
       {
-        "Paris, France": false,
-        "Boston, Massachusetts": false,
-        "Kitty Hawk, North Carolina": true,
-        "Tokyou, Japan": false,
+        "The Reverse Giraffe": false,
+        "The Flesh Curtains": true,
+        "King Flippy Nips": false,
+        "The Death Stalkers": false,
       }),
-  QuestionModel(
-      "The First astronuts to travel to space came from which country ?", {
-    "United States": false,
-    "Soviet Union (now Russia)": true,
-    "China": false,
-    "Rocketonia": false,
+  QuestionModel("How does Rick hop across universes and dimensions ?", {
+    "A sonic screwdriver": false,
+    "A portal gun": true,
+    "A puzzle box": false,
+    "A pair of laser goggles": false,
+  }),
+  QuestionModel("What is Ricks wife's name ?", {
+    "Nataly": false,
+    "Karol": false,
+    "Diane": true,
+    "Karen": false,
+  }),
+  QuestionModel("What was the name of his avian-human hybrid best friend ?", {
+    "Scrash": false,
+    "Jerry": false,
+    "Bird person": true,
+    "Morty": false,
+  }),
+  QuestionModel("What is the name of the girl that Morty is in love with ?", {
+    "Jaina": false,
+    "Sylvanas": false,
+    "Jessica": true,
+    "Tammy": false,
+  }),
+  QuestionModel("Why does Rick turn into a pickle ?", {
+    "He like pickle": false,
+    "Becouse he can": false,
+    "He wouldn't have to go to therapy": true,
+    "It was a morty challenge": false,
+  }),
+  QuestionModel("Rick and Morty was inspired by which movie ?", {
+    "Star Wars": false,
+    "Back to the future": true,
+    "Spider-man": false,
+    "Jurassic Park": false,
   }),
 ];
