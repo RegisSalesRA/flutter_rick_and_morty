@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/config/theme_color.dart';
-import 'package:rick_and_morty/src/modules/home/home_view.dart';
+
+import 'screens/screens.dart';
 
 class SplashScreenQuiz extends StatefulWidget {
-  const SplashScreenQuiz({Key? key}) : super(key: key);
+  final bool changeColor;
+  const SplashScreenQuiz({Key? key, required this.changeColor})
+      : super(key: key);
 
   @override
   State<SplashScreenQuiz> createState() => _SplashScreenQuizState();
@@ -23,9 +26,8 @@ class _SplashScreenQuizState extends State<SplashScreenQuiz>
 
   Route _createRoute() {
     return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => Home(changeColor: true,
-        themeColor: () {},
-      ),
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          const QuizzScreen(),
       transitionsBuilder: (
         context,
         animation,
@@ -72,7 +74,7 @@ class _SplashScreenQuizState extends State<SplashScreenQuiz>
               scale: _animation,
               child: InkWell(
                 onTap: () {
-                  // Navigator.of(context).pushReplacement(_createRoute());
+                  Navigator.of(context).push(_createRoute());
                 },
                 child: Container(
                   height: 60,
@@ -80,11 +82,13 @@ class _SplashScreenQuizState extends State<SplashScreenQuiz>
                   decoration: BoxDecoration(
                     boxShadow: kElevationToShadow[500],
                     borderRadius: BorderRadius.circular(35.0),
-                    color: AppThemeLight.primaryColor,
+                    color: widget.changeColor
+                        ? AppThemeDark.primaryColor
+                        : AppThemeLight.primaryColor,
                   ),
                   child: const Center(
                       child: Text(
-                    "Press to enter!",
+                    "Start Quiz!",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   )),
                 ),
