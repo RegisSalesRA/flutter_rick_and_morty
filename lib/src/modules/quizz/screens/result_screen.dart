@@ -31,18 +31,22 @@ class _ResultScreenState extends State<ResultScreen> {
                 if (widget.score == 10)
                   Image.asset(
                     'assets/images/maximo.png',
+                    height: 400,
                   ),
                 if (widget.score >= 7 && widget.score <= 9)
                   Image.asset(
                     'assets/images/media.png',
+                    height: 400,
                   ),
                 if (widget.score <= 6 && widget.score >= 1)
                   Image.asset(
                     'assets/images/abaixo.png',
+                    height: 400,
                   ),
                 if (widget.score == 0)
                   Image.asset(
                     'assets/images/zerada.png',
+                    height: 400,
                   ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
