@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../entity/entity.dart';
-import '../../../components/components.dart'; 
+import '../../../components/components.dart';
 
 class ListViewCard extends StatelessWidget {
   final bool changeColor;
@@ -28,7 +28,7 @@ class ListViewCard extends StatelessWidget {
                     FocusScope.of(context).unfocus(),
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => DetailWidget(
-                          changeColor :changeColor,
+                              changeColor: changeColor,
                               image: data![index].image,
                               tag: data![index].id.toString(),
                               name: data![index].name,

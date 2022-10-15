@@ -19,7 +19,7 @@ class _ResultScreenState extends State<ResultScreen> {
           height: size.height,
           decoration: const BoxDecoration(
               image: DecorationImage(
-            image: AssetImage('assets/images/starsbg.jpg'),
+            image: AssetImage('assets/images/resultbg.jpg'),
             fit: BoxFit.fill,
           )),
           child: SingleChildScrollView(
@@ -73,7 +73,10 @@ class _ResultScreenState extends State<ResultScreen> {
                   },
                   child: const Text(
                     "back to home",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
                   ),
                 ),
               ],

@@ -30,8 +30,8 @@ class _QuizzScreenState extends State<QuizzScreen> {
         width: size.width,
         decoration: const BoxDecoration(
             image: DecorationImage(
-          image: AssetImage('assets/images/starsbg.jpg'),
-          fit: BoxFit.fill,
+          image: AssetImage('assets/images/bgquiz.png'),
+          fit: BoxFit.cover,
         )),
         child: PageView.builder(
           itemCount: questions.length,
@@ -49,25 +49,17 @@ class _QuizzScreenState extends State<QuizzScreen> {
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                  child: Text(
-                    "Question ${index + 1}",
-                    textAlign: TextAlign.start,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 28.0,
-                    ),
-                  ),
-                ),
-                const Divider(
-                  color: Colors.white,
-                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: SizedBox(
+                  child: Container(
+                    padding: const EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.7),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20))),
                     width: double.infinity,
                     height: 100.0,
                     child: Text(
@@ -79,84 +71,46 @@ class _QuizzScreenState extends State<QuizzScreen> {
                     ),
                   ),
                 ),
-                for (int i = 0; i < questions[index].answers!.length; i++)
-                  Container(
-                    width: double.infinity,
-                    height: 50.0,
-                    decoration: BoxDecoration(
+                Column(children: [
+                  for (int i = 0; i < questions[index].answers!.length; i++)
+                    Container(
+                      width: double.infinity,
+                      height: 50.0,
+                      decoration: BoxDecoration(
+                        color: btnPressed
+                            ? questions[index].answers!.values.toList()[i]
+                                ? Colors.green
+                                : Colors.red
+                            : Colors.black.withOpacity(0.7),
                         borderRadius:
                             const BorderRadius.all(Radius.circular(5)),
-                        border: Border.all(
-                            color: btnPressed
-                                ? questions[index].answers!.values.toList()[i]
-                                    ? Colors.green
-                                    : Colors.red
-                                : Colors.grey.shade800,
-                            width: 1)),
-                    margin: const EdgeInsets.only(
-                        bottom: 20.0, left: 12.0, right: 12.0),
-                    child: RawMaterialButton(
-                      onPressed: !answered
-                          ? () {
-                              if (questions[index]
-                                  .answers!
-                                  .values
-                                  .toList()[i]) {
-                                score++;
-                              } else {}
-                              setState(() {
-                                btnPressed = true;
-                                answered = true;
-                              });
-                            }
-                          : null,
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(),
-                            Text(questions[index].answers!.keys.toList()[i],
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18.0,
-                                )),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 5),
-                              child: Container(
-                                height: 20,
-                                width: 20,
-                                decoration: BoxDecoration(
-                                    color: btnPressed
-                                        ? questions[index]
-                                                .answers!
-                                                .values
-                                                .toList()[i]
-                                            ? Colors.green
-                                            : Colors.red
-                                        : Colors.transparent,
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(10))),
-                                child: Center(
-                                  child: btnPressed
-                                      ? questions[index]
-                                              .answers!
-                                              .values
-                                              .toList()[i]
-                                          ? const Icon(
-                                              Icons.check,
-                                              size: 20,
-                                              color: Colors.white,
-                                            )
-                                          : const Icon(
-                                              Icons.cancel,
-                                              size: 20,
-                                            )
-                                      : Container(),
-                                ),
-                              ),
-                            )
-                          ]),
+                      ),
+                      margin: const EdgeInsets.only(
+                          bottom: 20.0, left: 12.0, right: 12.0),
+                      child: RawMaterialButton(
+                        onPressed: !answered
+                            ? () {
+                                if (questions[index]
+                                    .answers!
+                                    .values
+                                    .toList()[i]) {
+                                  score++;
+                                } else {}
+                                setState(() {
+                                  btnPressed = true;
+                                  answered = true;
+                                });
+                              }
+                            : null,
+                        child: Text(questions[index].answers!.keys.toList()[i],
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18.0,
+                            )),
+                      ),
                     ),
-                  ),
+                ]),
                 ElevatedButton(
                   onPressed: () {
                     if (_controller!.page?.toInt() == questions.length - 1) {
@@ -175,11 +129,12 @@ class _QuizzScreenState extends State<QuizzScreen> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white.withOpacity(0.1),
+                      backgroundColor: Colors.black.withOpacity(0.7),
                       textStyle: const TextStyle(fontSize: 16)),
                   child: Text(
                     btnText,
-                    style: const TextStyle(color: Colors.white),
+                    style: const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                 )
               ],
