@@ -72,7 +72,7 @@ class _DetailWidgetState extends State<DetailWidget> {
           child: Stack(
         children: [
           SingleChildScrollView(
-          physics: const  BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
                 SizedBox(
@@ -103,8 +103,8 @@ class _DetailWidgetState extends State<DetailWidget> {
                                     color: widget.changeColor
                                         ? AppThemeDark.alive
                                         : AppThemeLight.alive,
-                                    borderRadius:
-                                     const   BorderRadius.all(Radius.circular(100))),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(100))),
                               ),
                             if (widget.status == Status.DEAD)
                               Container(
@@ -114,8 +114,8 @@ class _DetailWidgetState extends State<DetailWidget> {
                                     color: widget.changeColor
                                         ? AppThemeDark.dead
                                         : AppThemeLight.dead,
-                                    borderRadius:
-                                    const    BorderRadius.all(Radius.circular(100))),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(100))),
                               ),
                             if (widget.status == Status.UNKNOWN)
                               Container(
@@ -125,8 +125,8 @@ class _DetailWidgetState extends State<DetailWidget> {
                                     color: widget.changeColor
                                         ? AppThemeDark.unknow
                                         : AppThemeLight.unknow,
-                                    borderRadius:
-                                 const       BorderRadius.all(Radius.circular(100))),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(100))),
                               ),
                             Padding(
                               padding:
@@ -283,9 +283,10 @@ class _DetailWidgetState extends State<DetailWidget> {
                                     'Male',
                                     style: TextStyle(
                                       overflow: TextOverflow.ellipsis,
+                                      fontSize: 18,
                                       color: widget.changeColor
-                                          ? AppThemeDark.titleDetail
-                                          : AppThemeLight.titleDetail,
+                                          ? AppThemeDark.subTitleDescription
+                                          : AppThemeLight.subTitleDescription,
                                     ),
                                   ),
                                 ),
@@ -295,6 +296,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                   child: Text(
                                     'Female',
                                     style: TextStyle(
+                                      fontSize: 18,
                                       overflow: TextOverflow.ellipsis,
                                       color: widget.changeColor
                                           ? AppThemeDark.subTitleDescription
@@ -321,6 +323,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 child: Text(
                                   widget.species,
                                   style: TextStyle(
+                                    fontSize: 18,
                                     color: widget.changeColor
                                         ? AppThemeDark.subTitleDescription
                                         : AppThemeLight.subTitleDescription,
@@ -347,6 +350,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 child: Text(
                                   "${widget.episode.length}",
                                   style: TextStyle(
+                                    fontSize: 18,
                                     color: widget.changeColor
                                         ? AppThemeDark.subTitleDescription
                                         : AppThemeLight.subTitleDescription,
