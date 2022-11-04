@@ -16,7 +16,7 @@ abstract class AppThemeLight {
 abstract class AppThemeDark {
   static const Color primaryColor = Color(0xEE1ed9a1);
   static const Color borderColor = Color(0xccccffcc);
-  static const Color backgroundColor = Color(0x00000000);
+  static const Color backgroundColor = Color(0xFF1e1e28);
   static const Color borderColor2 = Color(0xffffffcc);
   static const Color title = Color(0xFFFFFFFF);
   static const Color subTitleDescription = Color(0xFF7DB72D);

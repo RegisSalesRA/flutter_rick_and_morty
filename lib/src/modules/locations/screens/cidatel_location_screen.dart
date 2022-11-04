@@ -50,7 +50,7 @@ class _CidatelLocationScreenState extends State<CidatelLocationScreen> {
     final size = MediaQuery.of(context).size;
     return Material(
       child: Scaffold(
-        backgroundColor: widget.changeColor ? Colors.black : Colors.white,
+        backgroundColor: widget.changeColor ? AppThemeDark.backgroundColor : Colors.white,
         body: FutureBuilder<LocationPlace>(
             future: futureLocation,
             builder: (context, snapshot) {

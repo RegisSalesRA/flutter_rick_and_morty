@@ -37,16 +37,15 @@ class _BaseScreenViewState extends State<BaseScreenView> {
           LocationScreen(
             changeColor: changeColor,
           ),
-            SplashScreenQuiz( changeColor: changeColor,)
+          SplashScreenQuiz(
+            changeColor: changeColor,
+          )
         ],
       ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: Colors.grey.shade200,
-          borderRadius: const BorderRadius.only(
-            topRight: Radius.circular(24),
-            topLeft: Radius.circular(24),
-          ),
+      bottomNavigationBar: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(20),
+          topLeft: Radius.circular(20),
         ),
         child: BottomNavigationBar(
           backgroundColor: changeColor

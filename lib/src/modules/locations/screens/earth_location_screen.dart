@@ -51,7 +51,8 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
     final size = MediaQuery.of(context).size;
     return Material(
       child: Scaffold(
-        backgroundColor: widget.changeColor ? Colors.black : Colors.white,
+        backgroundColor:
+            widget.changeColor ? AppThemeDark.backgroundColor : Colors.white,
         body: FutureBuilder<LocationPlace>(
             future: futureLocation,
             builder: (context, snapshot) {
@@ -69,7 +70,7 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
                         child: Stack(
                       children: [
                         SingleChildScrollView(
-                          physics: const  BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

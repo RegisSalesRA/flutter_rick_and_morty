@@ -56,50 +56,51 @@ class _SplashScreenQuizState extends State<SplashScreenQuiz>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-      child: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/splash_home.jpg"),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            ScaleTransition(
-              scale: _animation,
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context).push(_createRoute());
-                },
-                child: Container(
-                  height: 60,
-                  width: 250,
-                  decoration: BoxDecoration(
-                    boxShadow: kElevationToShadow[500],
-                    borderRadius: BorderRadius.circular(35.0),
-                    color: widget.changeColor
-                        ? AppThemeDark.primaryColor
-                        : AppThemeLight.primaryColor,
-                  ),
-                  child: const Center(
-                      child: Text(
-                    "Start Quiz!",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  )),
-                ),
+    return SafeArea(
+      child: Scaffold(
+          backgroundColor: AppThemeDark.backgroundColor,
+          body: Container(
+            height: double.infinity,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/splash_home.jpg"),
+                fit: BoxFit.cover,
               ),
             ),
-            const SizedBox(
-              height: 100,
-            )
-          ],
-        ),
-      ),
-    ));
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ScaleTransition(
+                  scale: _animation,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(_createRoute());
+                    },
+                    child: Container(
+                      height: 60,
+                      width: 250,
+                      decoration: BoxDecoration(
+                        boxShadow: kElevationToShadow[500],
+                        borderRadius: BorderRadius.circular(35.0),
+                        color: widget.changeColor
+                            ? AppThemeDark.primaryColor
+                            : AppThemeLight.primaryColor,
+                      ),
+                      child: const Center(
+                          child: Text(
+                        "Start Quiz!",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      )),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 100,
+                )
+              ],
+            ),
+          )),
+    );
   }
 }

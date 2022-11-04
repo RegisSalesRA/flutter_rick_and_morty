@@ -1,3 +1,9 @@
+# Enviroments
+.vscode
+.fvm
+.packages
+pubspec.lock
+
 # Miscellaneous
 *.class
 *.log

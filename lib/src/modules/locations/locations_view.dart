@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../config/config.dart';
 import '../../components/components.dart';
 import 'screens/screens.dart';
 import 'widgets/widgets.dart';
@@ -11,13 +12,14 @@ class LocationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       child: Scaffold(
-        backgroundColor: changeColor ? Colors.black : Colors.white,
+        backgroundColor:
+            changeColor ? AppThemeDark.backgroundColor : Colors.white,
         body: SafeArea(
           child: Center(
               child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
-              physics: const  BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
                   Header(changeColor: changeColor),
