@@ -114,6 +114,20 @@ class _QuizzScreenState extends State<QuizzScreen> {
                       ),
                   ]),
                   /*
+
+                    LikeButton(
+                        size: 80,
+                        likeCount: 120,
+                        countPostion: CountPostion.bottom,
+                        likeBuilder: (isTapped) {
+                          return Icon(
+                            Icons.home,
+                            color: isTapped ? Colors.deepPurple : Colors.yellow,
+                          );
+                        },
+                      ),
+
+                      
                   // BOTAO MODIFICADO ELEVATED
                   ElevatedButton(
                     onPressed: () {

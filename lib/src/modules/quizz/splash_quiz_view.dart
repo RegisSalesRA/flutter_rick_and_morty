@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/config/theme_color.dart';
-
+import 'package:like_button/like_button.dart';
 import 'screens/screens.dart';
 
 class SplashScreenQuiz extends StatefulWidget {
@@ -74,26 +74,29 @@ class _SplashScreenQuizState extends State<SplashScreenQuiz>
             ScaleTransition(
               scale: _animation,
               child: InkWell(
-                onTap: () {
-                  Navigator.of(context).push(_createRoute());
-                },
-                child: Container(
-                  height: 60,
-                  width: 250,
-                  decoration: BoxDecoration(
-                    boxShadow: kElevationToShadow[500],
-                    borderRadius: BorderRadius.circular(35.0),
-                    color: widget.changeColor
-                        ? AppThemeDark.primaryColor
-                        : AppThemeLight.primaryColor,
-                  ),
-                  child: const Center(
-                      child: Text(
-                    "Start Quiz!",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  onTap: () {
+                    Navigator.of(context).push(_createRoute());
+                  },
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 60,
+                        width: 250,
+                        decoration: BoxDecoration(
+                          boxShadow: kElevationToShadow[500],
+                          borderRadius: BorderRadius.circular(35.0),
+                          color: widget.changeColor
+                              ? AppThemeDark.primaryColor
+                              : AppThemeLight.primaryColor,
+                        ),
+                        child: const Center(
+                            child: Text(
+                          "Start Quiz!",
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        )),
+                      ),
+                    ],
                   )),
-                ),
-              ),
             ),
             const SizedBox(
               height: 100,
