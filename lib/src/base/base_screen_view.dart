@@ -42,59 +42,53 @@ class _BaseScreenViewState extends State<BaseScreenView> {
           )
         ],
       ),
-      bottomNavigationBar: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(20),
-          topLeft: Radius.circular(20),
-        ),
-        child: BottomNavigationBar(
-          backgroundColor: changeColor
-              ? AppThemeDark.primaryColor
-              : AppThemeLight.primaryColor,
-          elevation: 0,
-          currentIndex: currentIndex,
-          onTap: (index) {
-            setState(() {
-              currentIndex = index;
-              pageController.jumpToPage(index);
-            });
-          },
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.grey.shade700,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: currentIndex == 1
-                  ? const ImageIcon(
-                      AssetImage("assets/images/characters.png"),
-                    )
-                  : const ImageIcon(
-                      AssetImage("assets/images/characters.png"),
-                    ),
-              label: 'Characters',
-            ),
-            BottomNavigationBarItem(
-              icon: currentIndex == 1
-                  ? const ImageIcon(
-                      AssetImage("assets/images/portal.png"),
-                    )
-                  : const ImageIcon(
-                      AssetImage("assets/images/portal.png"),
-                    ),
-              label: 'Location',
-            ),
-            BottomNavigationBarItem(
-              icon: currentIndex == 2
-                  ? const ImageIcon(
-                      AssetImage("assets/images/quiz.png"),
-                    )
-                  : const ImageIcon(
-                      AssetImage("assets/images/quiz.png"),
-                    ),
-              label: 'Quiz',
-            ),
-          ],
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: changeColor
+            ? AppThemeDark.primaryColor
+            : AppThemeLight.primaryColor,
+        elevation: 0,
+        currentIndex: currentIndex,
+        onTap: (index) {
+          setState(() {
+            currentIndex = index;
+            pageController.jumpToPage(index);
+          });
+        },
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.grey.shade700,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: currentIndex == 1
+                ? const ImageIcon(
+                    AssetImage("assets/images/characters.png"),
+                  )
+                : const ImageIcon(
+                    AssetImage("assets/images/characters.png"),
+                  ),
+            label: 'Characters',
+          ),
+          BottomNavigationBarItem(
+            icon: currentIndex == 1
+                ? const ImageIcon(
+                    AssetImage("assets/images/portal.png"),
+                  )
+                : const ImageIcon(
+                    AssetImage("assets/images/portal.png"),
+                  ),
+            label: 'Location',
+          ),
+          BottomNavigationBarItem(
+            icon: currentIndex == 2
+                ? const ImageIcon(
+                    AssetImage("assets/images/quiz.png"),
+                  )
+                : const ImageIcon(
+                    AssetImage("assets/images/quiz.png"),
+                  ),
+            label: 'Quiz',
+          ),
+        ],
       ),
     );
   }

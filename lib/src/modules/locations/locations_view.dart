@@ -15,15 +15,15 @@ class LocationScreen extends StatelessWidget {
         backgroundColor:
             changeColor ? AppThemeDark.backgroundColor : Colors.white,
         body: SafeArea(
-          child: Center(
-              child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Column(
-                children: [
-                  Header(changeColor: changeColor),
-                  ChoiceLocation(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Header(changeColor: changeColor),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: ChoiceLocation(
                     changeColor: changeColor,
                     title: 'Earth',
                     label: 'Planet',
@@ -35,7 +35,10 @@ class LocationScreen extends StatelessWidget {
                               changeColor: changeColor,
                             ))),
                   ),
-                  ChoiceLocation(
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: ChoiceLocation(
                     changeColor: changeColor,
                     title: 'Cidatel of Ricks',
                     label: 'Space Stadium',
@@ -45,10 +48,10 @@ class LocationScreen extends StatelessWidget {
                               changeColor: changeColor,
                             ))),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          )),
+          ),
         ),
       ),
     );
