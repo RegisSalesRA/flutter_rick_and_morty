@@ -19,7 +19,6 @@ class ListViewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-       
         shrinkWrap: true,
         itemCount: data!.length,
         itemBuilder: (_, index) {

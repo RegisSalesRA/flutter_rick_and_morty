@@ -4,7 +4,9 @@ import '../../../../entity/entity.dart';
 import '../../../components/components.dart';
 import '../repository/location_repository.dart';
 import '../widgets/widgets.dart';
-import 'dart:async'; 
+import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class EarthLocationScreen extends StatefulWidget {
   final bool changeColor;
@@ -21,16 +23,26 @@ class _EarthLocationScreenState extends State<EarthLocationScreen> {
       repositoryLocationImp.residentsByLocation;
   late Future<LocationPlace> futureLocation;
 
-  void iniciar() async {
-    await repositoryLocationImp
-        .fetchEarchLocationResidents(residentsByLocation);
-    setState(() {});
+  fetchEarchLocationResidents() async {
+    final response =
+        await http.get(Uri.parse('https://rickandmortyapi.com/api/location/1'));
+    var locationFetch = LocationPlace.fromJson(jsonDecode(response.body));
+
+    for (var item in locationFetch.residents) {
+      final response = await http.get(Uri.parse(item));
+      var value = Result.fromJson(jsonDecode(response.body));
+
+      if (!mounted) return;
+      setState(() {
+        residentsByLocation.add(value);
+      });
+    }
   }
 
   @override
   void initState() {
     super.initState();
-    iniciar();
+    fetchEarchLocationResidents();
     futureLocation = repositoryLocationImp.fetchEarchLocation(1);
   }
 
