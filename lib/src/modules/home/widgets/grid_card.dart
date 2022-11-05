@@ -6,17 +6,19 @@ import '../../../components/components.dart';
 class GridCard extends StatelessWidget {
   final List<dynamic> listItens;
   final bool changeColor;
-  const GridCard({
-    Key? key,
-    required this.listItens,
-    required this.changeColor,
-  }) : super(key: key);
+  final ScrollController? controllerScroll;
+  const GridCard(
+      {Key? key,
+      required this.listItens,
+      required this.changeColor,
+      required this.controllerScroll})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+        controller: controllerScroll,
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-        physics: const BouncingScrollPhysics(),
         shrinkWrap: true,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,

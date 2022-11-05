@@ -7,13 +7,14 @@ import 'dart:convert';
 class RepositoryHomeImp extends ChangeNotifier {
   String searchString = "";
   List<Result> futureCharacterFilterImp = [];
+  List<Result> futureCharacterListScrollView = [];
   late Future<List<Result>> futureCharacterList;
   late List<Result> futureCharacterFilter = [];
   bool isLoading = false;
 
-  Future<List<Result>> fetchCharacters() async {
-    final response =
-        await http.get(Uri.parse('https://rickandmortyapi.com/api/character'));
+  Future<List<Result>> fetchCharacters(int page) async {
+    final response = await http.get(
+        Uri.parse("https://rickandmortyapi.com/api/character/?page=$page"));
 
     if (response.statusCode == 200) {
       var jsonResponse = json.decode(response.body);
