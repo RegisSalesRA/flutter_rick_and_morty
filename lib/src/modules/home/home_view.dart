@@ -64,37 +64,9 @@ class _HomeState extends State<Home> {
     if (_controller.offset == _controller.position.maxScrollExtent) {
       if (!isLastPage) {
         page++;
-        fetchData();
+        await repositoryHomeImp.fetchData(loading, isLastPage, page);
       }
-    }
-  }
-
-  Future<void> fetchData() async {
-    loading.value = true;
-    try {
-      final response = await http.get(
-          Uri.parse("https://rickandmortyapi.com/api/character/?page=$page"));
-
-      final request = json.decode(response.body);
-      final requestResults = request["results"] as List;
-      final requestInstance =
-          requestResults.map((data) => Result.fromJson(data)).toList();
-
-      if (request.isEmpty) {
-        setState(() {
-          isLastPage = true;
-        });
-      }
-
-      for (var iten in requestInstance) {
-        setState(() {
-          futureCharacterListScrollView.add(iten);
-        });
-      }
-
-      loading.value = false;
-    } catch (e) {
-      e;
+      setState(() {});
     }
   }
 
@@ -103,7 +75,7 @@ class _HomeState extends State<Home> {
     super.initState();
     _controller = ScrollController();
     _controller.addListener(infinitScroll);
-    fetchData();
+    repositoryHomeImp.fetchData(loading, isLastPage, page);
     futureCharacterList = fetchCharacters;
   }
 

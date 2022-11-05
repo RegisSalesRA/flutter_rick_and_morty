@@ -47,6 +47,29 @@ class RepositoryHomeImp extends ChangeNotifier {
     }
   }
 
+  Future<void> fetchData(
+      ValueNotifier loading, bool isLastPage, int page) async {
+    loading.value = true;
+    try {
+      final response = await http.get(
+          Uri.parse("https://rickandmortyapi.com/api/character/?page=$page"));
 
-  
+      final request = json.decode(response.body);
+      final requestResults = request["results"] as List;
+      final requestInstance =
+          requestResults.map((data) => Result.fromJson(data)).toList();
+
+      if (request.isEmpty) {
+        isLastPage = true;
+      }
+
+      for (var iten in requestInstance) {
+        futureCharacterListScrollView.add(iten);
+      }
+
+      loading.value = false;
+    } catch (e) {
+      e;
+    }
+  }
 }
