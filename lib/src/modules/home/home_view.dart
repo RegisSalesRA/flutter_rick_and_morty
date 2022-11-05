@@ -2,8 +2,6 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/src/modules/home/repository/home_repository.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 import '../../../config/config.dart';
 import '../../../entity/entity.dart';
