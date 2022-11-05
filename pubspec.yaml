@@ -49,7 +49,6 @@ dev_dependencies:
   flutter_native_splash: ^1.2.0
   flutter_launcher_icons: 
   shimmer: ^2.0.0
-  like_button: ^2.0.5
  
 
 flutter_icons:

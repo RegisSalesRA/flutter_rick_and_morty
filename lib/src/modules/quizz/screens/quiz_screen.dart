@@ -113,22 +113,6 @@ class _QuizzScreenState extends State<QuizzScreen> {
                         ),
                       ),
                   ]),
-                  /*
-
-                    LikeButton(
-                        size: 80,
-                        likeCount: 120,
-                        countPostion: CountPostion.bottom,
-                        likeBuilder: (isTapped) {
-                          return Icon(
-                            Icons.home,
-                            color: isTapped ? Colors.deepPurple : Colors.yellow,
-                          );
-                        },
-                      ),
-
-                      
-                  // BOTAO MODIFICADO ELEVATED
                   ElevatedButton(
                     onPressed: () {
                       if (_controller!.page?.toInt() == questions.length - 1) {
@@ -140,15 +124,21 @@ class _QuizzScreenState extends State<QuizzScreen> {
                         _controller!.nextPage(
                             duration: const Duration(milliseconds: 250),
                             curve: Curves.easeInExpo);
-    
+
                         setState(() {
                           btnPressed = false;
                         });
                       }
                     },
-              
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black.withOpacity(0.7),
+                        textStyle: const TextStyle(fontSize: 16)),
+                    child: Text(
+                      btnText,
+                      style: const TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
                   )
-                  */
                 ],
               );
             },

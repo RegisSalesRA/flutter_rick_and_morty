@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/config/theme_color.dart';
-import 'package:like_button/like_button.dart';
+import 'package:rick_and_morty/config/theme_color.dart'; 
 import 'screens/screens.dart';
 
 class SplashScreenQuiz extends StatefulWidget {
