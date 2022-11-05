@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/src/modules/home/repository/home_repository.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import '../../../config/config.dart';
 import '../../../entity/entity.dart';
@@ -62,9 +64,37 @@ class _HomeState extends State<Home> {
     if (_controller.offset == _controller.position.maxScrollExtent) {
       if (!isLastPage) {
         page++;
-        await repositoryHomeImp.fetchData(loading, isLastPage, page);
+        fetchData();
       }
-      setState(() {});
+    }
+  }
+
+  Future<void> fetchData() async {
+    loading.value = true;
+    try {
+      final response = await http.get(
+          Uri.parse("https://rickandmortyapi.com/api/character/?page=$page"));
+
+      final request = json.decode(response.body);
+      final requestResults = request["results"] as List;
+      final requestInstance =
+          requestResults.map((data) => Result.fromJson(data)).toList();
+
+      if (request.isEmpty) {
+        setState(() {
+          isLastPage = true;
+        });
+      }
+
+      for (var iten in requestInstance) {
+        setState(() {
+          futureCharacterListScrollView.add(iten);
+        });
+      }
+
+      loading.value = false;
+    } catch (e) {
+      e;
     }
   }
 
@@ -73,7 +103,7 @@ class _HomeState extends State<Home> {
     super.initState();
     _controller = ScrollController();
     _controller.addListener(infinitScroll);
-    repositoryHomeImp.fetchData(loading, isLastPage, page);
+    fetchData();
     futureCharacterList = fetchCharacters;
   }
 
