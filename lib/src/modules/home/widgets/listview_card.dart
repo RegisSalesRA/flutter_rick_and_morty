@@ -19,7 +19,7 @@ class ListViewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        physics: const BouncingScrollPhysics(),
+       
         shrinkWrap: true,
         itemCount: data!.length,
         itemBuilder: (_, index) {

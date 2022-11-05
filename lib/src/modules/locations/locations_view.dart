@@ -16,7 +16,7 @@ class LocationScreen extends StatelessWidget {
             changeColor ? AppThemeDark.backgroundColor : Colors.white,
         body: SafeArea(
           child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
+
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [

@@ -23,7 +23,6 @@ class ListResidentsWidget extends StatelessWidget {
           height: 65,
           width: size.width,
           child: ListView.builder(
-            physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
             itemCount: lista.length,
@@ -50,9 +49,13 @@ class ListResidentsWidget extends StatelessWidget {
                             changeColor: changeColor,
                             episode: lista[index].episode)));
                   },
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(25)),
-                    child: Image.network(lista[index].image),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(lista[index].image),
+                      ),
+                      borderRadius: const BorderRadius.all(Radius.circular(25)),
+                    ),
                   ),
                 ),
               );

@@ -12,7 +12,7 @@ class ShimmerCharacters extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: SingleChildScrollView(
-        physics: const  BouncingScrollPhysics(),
+       
         child: Column(
           children: [
               Header(changeColor: changeColor),
@@ -29,7 +29,7 @@ class ShimmerCharacters extends StatelessWidget {
             GridView.count(
               shrinkWrap: true,
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-              physics: const BouncingScrollPhysics(),
+            
               crossAxisCount: 2,
               mainAxisSpacing: 8,
               crossAxisSpacing: 8,

@@ -23,7 +23,7 @@ class _ResultScreenState extends State<ResultScreen> {
             fit: BoxFit.fill,
           )),
           child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
+           
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
