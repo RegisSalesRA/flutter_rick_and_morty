@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../config/config.dart';
 import '../../../../entity/entity.dart';
 import '../../../components/components.dart';
 
@@ -62,10 +63,12 @@ class ListViewCard extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(vertical: 15),
                             child: Text(
                               data![index].name,
-                              style: const TextStyle(
+                              style: TextStyle(
                                   overflow: TextOverflow.ellipsis,
-                                  color: Colors.black,
-                                  fontSize: 12,
+                                  color: changeColor
+                                      ? AppThemeDark.primaryColor
+                                      : AppThemeLight.primaryColor,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),

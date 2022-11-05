@@ -22,7 +22,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   // Enviroments
-  // List<Result> characterList = [];
   int page = 1;
   bool isLastPage = false;
   final loading = ValueNotifier(true);
@@ -38,7 +37,6 @@ class _HomeState extends State<Home> {
       repositoryHomeImp.futureCharacterListScrollView;
   late String searchString = repositoryHomeImp.searchString;
   late bool isLoading = repositoryHomeImp.isLoading;
-
   //Controllers
   final searchController = TextEditingController();
   late final ScrollController _controller;
@@ -67,9 +65,6 @@ class _HomeState extends State<Home> {
       if (!isLastPage) {
         page++;
         fetchData();
-        print(page);
-        print("Esta carregando? $isLoading");
-        print(isLastPage);
       }
     }
   }
@@ -96,10 +91,10 @@ class _HomeState extends State<Home> {
           futureCharacterListScrollView.add(iten);
         });
       }
-      print(futureCharacterListScrollView.length);
+
       loading.value = false;
     } catch (e) {
-      print(e);
+      e;
     }
   }
 
@@ -137,8 +132,6 @@ class _HomeState extends State<Home> {
               );
             case ConnectionState.done:
               if (snapshot.hasData && !snapshot.hasError) {
-                List<Result>? data = snapshot.data;
-                print(data!.length);
                 return SafeArea(
                   child: Stack(
                     children: [
@@ -190,11 +183,11 @@ class _HomeState extends State<Home> {
                             if (searchString.isNotEmpty)
                               ListViewCard(
                                   changeColor: widget.changeColor,
-                                  data: data,
+                                  data: futureCharacterListScrollView,
                                   searchString: searchString),
                             if (searchString.isEmpty || searchString == '')
                               SizedBox(
-                                height: 400,
+                                height: size.height * 0.70,
                                 child: GridCard(
                                   changeColor: widget.changeColor,
                                   listItens: futureCharacterListScrollView,
@@ -246,7 +239,10 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                       ),
-                      LoadingWidgetScrollView(isLoading: loading),
+                      LoadingWidgetScrollView(
+                        isLoading: loading,
+                        changeColor: widget.changeColor,
+                      ),
                       isLoading
                           ? Container(
                               color: Colors.black.withOpacity(0.5),

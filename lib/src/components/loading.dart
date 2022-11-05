@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../../config/config.dart';
+
 class LoadingWidgetScrollView extends StatelessWidget {
   final ValueNotifier<bool> isLoading;
+  final bool changeColor;
 
-  const LoadingWidgetScrollView({Key? key, required this.isLoading}) : super(key: key);
+  const LoadingWidgetScrollView(
+      {Key? key, required this.isLoading, required this.changeColor})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +19,16 @@ class LoadingWidgetScrollView extends StatelessWidget {
               ? Positioned(
                   left: (MediaQuery.of(context).size.width / 2) - 20,
                   bottom: 20,
-                  child: const CircleAvatar(
-                    child: SizedBox(
+                  child: CircleAvatar(
+                    backgroundColor: changeColor
+                        ? AppThemeDark.primaryColor
+                        : AppThemeLight.primaryColor,
+                    child: const SizedBox(
                       width: 20,
                       height: 20,
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
+                        color: Colors.white,
                       ),
                     ),
                   ))
