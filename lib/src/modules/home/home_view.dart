@@ -181,10 +181,13 @@ class _HomeState extends State<Home> {
                               }),
                           if (futureCharacterFilter.isEmpty) ...[
                             if (searchString.isNotEmpty)
-                              ListViewCard(
-                                  changeColor: widget.changeColor,
-                                  data: futureCharacterListScrollView,
-                                  searchString: searchString),
+                              SizedBox(
+                                height: size.height * 0.70,
+                                child: ListViewCard(
+                                    changeColor: widget.changeColor,
+                                    data: futureCharacterListScrollView,
+                                    searchString: searchString),
+                              ),
                             if (searchString.isEmpty || searchString == '')
                               SizedBox(
                                 height: size.height * 0.70,
@@ -196,10 +199,13 @@ class _HomeState extends State<Home> {
                               ),
                           ] else if (futureCharacterFilter.isNotEmpty) ...[
                             if (searchString.isNotEmpty)
-                              ListViewCard(
-                                  changeColor: widget.changeColor,
-                                  data: futureCharacterFilter,
-                                  searchString: searchString),
+                              SizedBox(
+                                height: size.height * 0.70,
+                                child: ListViewCard(
+                                    changeColor: widget.changeColor,
+                                    data: futureCharacterFilter,
+                                    searchString: searchString),
+                              ),
                             if (searchString.isEmpty || searchString == '')
                               GridCard(
                                 controllerScroll: _controller,
