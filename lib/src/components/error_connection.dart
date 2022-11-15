@@ -6,34 +6,26 @@ class ErrorConnection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/images/starsbg.jpg"),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: SingleChildScrollView(
-      
-          child: Column(children: [
-        Image.asset(
-          'assets/images/error.png',
-          height: 350,
-        ),
-        const Text(
-          "Error connection",
-          style: TextStyle(
-              fontSize: 28, fontWeight: FontWeight.bold, color: Colors.red),
-        ),
-        Container(
-          padding: const EdgeInsets.all(25),
-          child: const Text(
-            "Please check your internet connection or try again later!",
-            style: TextStyle(
-                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.red),
+        child: SingleChildScrollView(
+        
+            child: Column(children: [
+          Image.asset(
+            'assets/images/error.png',
+            height: 350,
           ),
-        )
-      ])),
-    ));
+          const Text(
+            "Error connection",
+            style: TextStyle(
+                fontSize: 28, fontWeight: FontWeight.bold, color: Colors.red),
+          ),
+          Container(
+            padding: const EdgeInsets.all(25),
+            child: const Text(
+              "Please check your internet connection or try again later!",
+              style: TextStyle(
+                  fontSize: 16, fontWeight: FontWeight.bold, color: Colors.red),
+            ),
+          )
+        ])));
   }
 }
