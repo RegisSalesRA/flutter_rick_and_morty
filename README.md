@@ -1,6 +1,6 @@
-# Flutter Rick and Morty
+# [Flutter][] Rick and Morty
 
-Dados do meu repositorio do github para o flutter
+[Flutter]: https://docs.flutter.dev/
 
 <h2>Índice 📋</h2>
 
@@ -17,7 +17,7 @@ Dados do meu repositorio do github para o flutter
 <h2>About App</h2>
 
 <p>
-Decidi realizar esse desafio de consumir uma api publica do github para aprender e me desafiar com novas ferramentas e conhecimentos em api publica
+I dedicated this project to one of my favorite cartoons, i really enjoyed build this project and learn how to implement new widgets with flutter
 </p>
 
 <h2>Screenshots</h2>
@@ -32,7 +32,7 @@ Decidi realizar esse desafio de consumir uma api publica do github para aprender
 <img src="https://img.shields.io/badge/Flutter Version-3.3.2-blue"> <img src="https://img.shields.io/badge/Dart Version-2.18.1-blueviolet"> <img src="https://img.shields.io/badge/JDK version-11.0.16-yellowgreen">
  
 <p>
-Desenvolvimento focado em mostrar dados e repositorios que uso no github afim de transmitir também novos conhecimentos para demais pessoas
+The project is a simple way to consume a public api from rick and morty documentation , and i not used any library to menager state, i learn new features and implementations to handle and bring a good user experience
 </p>
 
 
@@ -42,10 +42,10 @@ Desenvolvimento focado em mostrar dados e repositorios que uso no github afim de
 ```
 
 - Clone o repositório:
-$ git clone git@github.com:RegisSalesRA/Flutter_Github_Api.git
+$ git clone https://github.com/RegisSalesRA/flutter_rick_and_morty.git
 
 - Entre no diretório:
-$ cd flutter_github_api
+$ cd flutter_rick_and_morty
 
 - Instale as dependências:
 $ flutter pub get / flutter packages get
@@ -61,9 +61,8 @@ $ flutter run
 <h2>Packages</h2>
 <p>
 
--  font_awesome_flutter: ^10.1.0
--  http: ^0.13.4
--  provider: ^6.0.2 
+-  shimmer: ^2.0.0
+-  http: ^0.13.4 
 
 </br>
 
