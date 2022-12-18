@@ -17,7 +17,7 @@
 <h2>About App</h2>
 
 <p>
-I dedicated this project to one of my favorite cartoons, i really enjoyed build this project and learn how to implement new widgets with flutter
+Decided to create an application to learn more about ways to consume api and also apply new flutter native features, in this project where I consume a public rick and morty api I was able to build a good screen base to show the end user a good result
 </p>
 
 <h2>Screenshots</h2>
