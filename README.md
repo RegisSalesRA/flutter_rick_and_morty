@@ -17,7 +17,7 @@
 <h2>About App</h2>
 
 <p>
-Decided to create an application to learn more about ways to consume api and also apply new flutter native features, in this project where I consume a public rick and morty api I was able to build a good screen base to show the end user a good result
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
 </p>
 
 <h2>Screenshots</h2>
@@ -32,7 +32,7 @@ Decided to create an application to learn more about ways to consume api and als
 <img src="https://img.shields.io/badge/Flutter Version-3.3.2-blue"> <img src="https://img.shields.io/badge/Dart Version-2.18.1-blueviolet"> <img src="https://img.shields.io/badge/JDK version-11.0.16-yellowgreen">
  
 <p>
-The project is a simple way to consume a public api from rick and morty documentation , and i not used any library to menager state, i learn new features and implementations to handle and bring a good user experience
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
 </p>
 
 
