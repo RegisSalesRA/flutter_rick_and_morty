@@ -22,7 +22,7 @@ Decided to create an application to learn more about ways to consume api and als
 
 <h2>Screenshots</h2>
 
-<img src="https://github.com/RegisSalesRA/Flutter_Github_Api/blob/master/assets/readme/logo.png" width="250"> <img src="https://github.com/RegisSalesRA/Flutter_Github_Api/blob/master/assets/readme/repositorios.png" width="250"> <img src="https://github.com/RegisSalesRA/Flutter_Github_Api/blob/master/assets/readme/starred.png" width="250"> 
+<img src="https://github.com/RegisSalesRA/flutter_rick_and_morty/blob/master/assets/readme/characters.gif" width="250"> <img src="https://github.com/RegisSalesRA/flutter_rick_and_morty/blob/master/assets/readme/locations.gif" width="250"> <img src="https://github.com/RegisSalesRA/flutter_rick_and_morty/blob/master/assets/readme/quiz.png" width="250"> 
 
 <p>
 </p>
