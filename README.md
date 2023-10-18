@@ -17,12 +17,12 @@
 <h2>About App</h2>
 
 <p>
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+Decided to create an application to learn more about ways to consume api and also apply new flutter native features, in this project where I consume a public rick and morty api I was able to build a good screen base to show the end user a good result
 </p>
 
 <h2>Screenshots</h2>
 
-<img src="https://github.com/RegisSalesRA/flutter_rick_and_morty/blob/master/assets/readme/characters.gif" width="250"> <img src="https://github.com/RegisSalesRA/flutter_rick_and_morty/blob/master/assets/readme/locations.gif" width="250"> <img src="https://github.com/RegisSalesRA/flutter_rick_and_morty/blob/master/assets/readme/quiz.png" width="250"> 
+<img src="https://github.com/RegisSalesRA/Flutter_Github_Api/blob/master/assets/readme/logo.png" width="250"> <img src="https://github.com/RegisSalesRA/Flutter_Github_Api/blob/master/assets/readme/repositorios.png" width="250"> <img src="https://github.com/RegisSalesRA/Flutter_Github_Api/blob/master/assets/readme/starred.png" width="250"> 
 
 <p>
 </p>
@@ -32,7 +32,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 <img src="https://img.shields.io/badge/Flutter Version-3.3.2-blue"> <img src="https://img.shields.io/badge/Dart Version-2.18.1-blueviolet"> <img src="https://img.shields.io/badge/JDK version-11.0.16-yellowgreen">
  
 <p>
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+The project is a simple way to consume a public api from rick and morty documentation , and i not used any library to menager state, i learn new features and implementations to handle and bring a good user experience
 </p>
 
 
